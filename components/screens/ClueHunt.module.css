@@ -1,0 +1,499 @@
+.board {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--r-2xl);
+  background: var(--white);
+  box-shadow: var(--sh-card);
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------- 좌: 장면 */
+
+.scenePane {
+  position: relative;
+  min-height: 440px;
+  background: #dfeaf4;
+  overflow: hidden;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sceneTop {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  z-index: 3;
+}
+
+.stepBadge {
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(120deg, #22c9a8, #2f6fd6);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 18px rgba(34, 150, 190, 0.4);
+}
+
+.sceneTitle {
+  padding: 7px 15px;
+  border-radius: var(--r-pill);
+  background: rgba(9, 22, 45, 0.62);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+/* --- 핫스팟 --- */
+.hotspot {
+  position: absolute;
+  z-index: 4;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 6px 18px rgba(6, 24, 48, 0.3);
+  transition: gap 0.22s ease, padding 0.22s ease, box-shadow 0.22s ease;
+}
+
+.hotDot {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--grad-mint);
+  color: #fff;
+}
+
+.hotspot::after {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 19px;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(53, 224, 189, 0.55);
+  animation: ping 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ping {
+  0% {
+    box-shadow: 0 0 0 0 rgba(53, 224, 189, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(53, 224, 189, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(53, 224, 189, 0);
+  }
+}
+
+.hotLabel {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-900);
+  transition: max-width 0.28s ease, padding 0.28s ease;
+}
+
+.hotspot:hover {
+  box-shadow: 0 10px 26px rgba(6, 24, 48, 0.36);
+}
+
+.hotspot:hover .hotLabel,
+.hotActive .hotLabel {
+  max-width: 160px;
+  padding: 0 14px 0 8px;
+}
+
+.hotFound .hotDot {
+  background: #ffffff;
+  color: var(--mint-600);
+  box-shadow: inset 0 0 0 2px var(--mint-500);
+}
+
+.hotFound::after {
+  animation: none;
+}
+
+.hotActive {
+  box-shadow: 0 0 0 3px var(--mint-400), 0 10px 26px rgba(6, 24, 48, 0.36);
+}
+
+/* --- 탐지율 --- */
+.detect {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 18px 10px 11px;
+  border-radius: var(--r-pill);
+  background: rgba(9, 22, 45, 0.76);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 26px rgba(4, 12, 28, 0.34);
+}
+
+.detectIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(53, 224, 189, 0.16);
+  color: var(--mint-400);
+  box-shadow: inset 0 0 0 1.4px rgba(53, 224, 189, 0.45);
+}
+
+.detectText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.detectLabel {
+  font-size: 10.5px;
+  color: var(--on-navy-dim);
+}
+
+.detectValue {
+  font-size: 21px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.detectBar {
+  width: 82px;
+  height: 7px;
+  border-radius: var(--r-pill);
+  background: rgba(234, 242, 255, 0.18);
+  overflow: hidden;
+}
+
+.detectFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--lime-400), var(--mint-400));
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ------------------------------------------------------- 우: 노트 */
+
+.notePane {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 26px 26px 24px;
+  background: var(--white);
+  min-width: 0;
+}
+
+.noteTitle {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--ink-900);
+  letter-spacing: -0.03em;
+}
+
+.noteTitle em {
+  font-style: normal;
+  color: var(--mint-600);
+}
+
+.noteSub {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--ink-400);
+  line-height: 1.55;
+}
+
+/* 단서 상세 */
+.detail {
+  padding: 16px 17px;
+  border-radius: var(--r-lg);
+  background: var(--paper-50);
+  box-shadow: inset 0 0 0 1px var(--paper-200);
+  min-height: 148px;
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.detailOn {
+  background: #f2fbf8;
+  box-shadow: inset 0 0 0 1.5px rgba(53, 224, 189, 0.42);
+}
+
+.detailEmpty {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-400);
+}
+
+.kind {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.kind.mint {
+  background: rgba(53, 224, 189, 0.16);
+  color: #0d8f77;
+}
+.kind.blue {
+  background: rgba(99, 164, 255, 0.18);
+  color: var(--blue-600);
+}
+.kind.coral {
+  background: rgba(255, 122, 144, 0.16);
+  color: var(--coral-500);
+}
+.kind.lime {
+  background: rgba(182, 225, 47, 0.24);
+  color: #6c8a0d;
+}
+
+.detailTitle {
+  margin: 8px 0 6px;
+  font-size: 15.5px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.detailText {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-700);
+}
+
+.detailInsight {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--paper-300);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--mint-600);
+  font-weight: 500;
+}
+
+.detailInsight svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+/* 수집 목록 */
+.clueList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.clueRow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: var(--r-md);
+  background: var(--paper-50);
+  font-size: 12.5px;
+  text-align: left;
+  transition: background 0.16s ease;
+}
+
+.clueRow:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
+.clueCheck {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--paper-200);
+  color: #fff;
+}
+
+.clueName {
+  flex: 1;
+  min-width: 0;
+  color: var(--ink-400);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clueOn .clueCheck {
+  background: var(--mint-500);
+}
+
+.clueOn .clueName {
+  color: var(--ink-900);
+  font-weight: 500;
+}
+
+.clueOn:hover {
+  background: var(--paper-100);
+}
+
+.clueActive {
+  background: rgba(53, 224, 189, 0.12);
+  box-shadow: inset 0 0 0 1.4px rgba(53, 224, 189, 0.4);
+}
+
+.dotTone {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dotTone.mint {
+  background: var(--mint-500);
+}
+.dotTone.blue {
+  background: var(--blue-500);
+}
+.dotTone.coral {
+  background: var(--coral-500);
+}
+.dotTone.lime {
+  background: var(--lime-500);
+}
+
+/* 힌트 */
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  background: rgba(182, 225, 47, 0.14);
+  color: #5f7d0c;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.hint svg {
+  flex: none;
+}
+
+/* 액션 */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.ghost {
+  flex: none;
+  padding: 15px 22px;
+  border-radius: var(--r-pill);
+  background: var(--paper-100);
+  color: var(--ink-700);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.16s ease;
+}
+
+.ghost:hover {
+  background: var(--paper-200);
+}
+
+.cta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 20px;
+  border-radius: var(--r-pill);
+  background: var(--grad-cta);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 900;
+  box-shadow: var(--sh-cta);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.cta:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.cta:disabled {
+  background: var(--paper-200);
+  color: var(--ink-400);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------- 반응형 */
+
+/* 스택 레이아웃에서는 장면 영역을 일러스트 비율(620:720)에 맞춘다.
+   그래야 slice 크롭이 발생하지 않아 핫스팟 좌표(%)가 그림과 정확히 일치한다. */
+@media (max-width: 1080px) {
+  .board {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto;
+  }
+  .scenePane {
+    aspect-ratio: 620 / 720;
+    min-height: 0;
+    max-height: 62vh;
+  }
+}
+
+@media (max-width: 620px) {
+  .board {
+    border-radius: var(--r-xl);
+  }
+  .notePane {
+    padding: 20px 16px 22px;
+  }
+  .hotLabel {
+    display: none;
+  }
+  .actions {
+    flex-direction: column-reverse;
+  }
+  .ghost {
+    width: 100%;
+  }
+}

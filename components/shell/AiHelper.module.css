@@ -1,0 +1,112 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding-top: 14px;
+  margin-top: auto;
+}
+
+.bubble {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 12px 14px 13px;
+  border-radius: 18px;
+  background: var(--white);
+  color: var(--ink-900);
+  text-align: center;
+  box-shadow: 0 10px 24px rgba(2, 10, 24, 0.4);
+  transition: transform 0.18s ease;
+}
+
+.bubble:hover {
+  transform: translateY(-2px);
+}
+
+.bubbleTop {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-500);
+}
+
+.bubbleMain {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.tail {
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 16px;
+  height: 16px;
+  transform: translateX(-50%) rotate(45deg);
+  border-radius: 3px;
+  background: var(--white);
+}
+
+.robotRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.robot {
+  width: 78px;
+  height: 75px;
+  margin-top: 8px;
+  filter: drop-shadow(0 8px 16px rgba(53, 224, 189, 0.28));
+  animation: bob 3.4s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.statusName {
+  color: var(--on-navy-dim);
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mint-400);
+  box-shadow: 0 0 0 3px rgba(53, 224, 189, 0.22);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.statusOn {
+  color: var(--mint-400);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}

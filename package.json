@@ -1,0 +1,22 @@
+{
+  "name": "maum-signal-lab",
+  "version": "2.0.0",
+  "private": true,
+  "description": "AI 시대에 사람의 마음을 이해하는 직업을 체험하는 중학생용 진로교육 웹앱 마음 SIGNAL LAB",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themonsteredu/ai-psychology.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "next": "^16.3.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}

@@ -1,0 +1,150 @@
+/* ==========================================================================
+   마음 SIGNAL LAB — 디자인 토큰 & 전역 스타일
+   딥 네이비 셸 + 밝은 화이트 카드 + 민트/블루/라임 포인트
+   ========================================================================== */
+
+:root {
+  /* --- 딥 네이비 계열 (셸/배경) --- */
+  --navy-900: #050d1e;
+  --navy-850: #071129;
+  --navy-800: #08142b;
+  --navy-700: #0d1e3f;
+  --navy-600: #122952;
+  --navy-line: rgba(148, 191, 255, 0.14);
+
+  /* --- 포인트 컬러 --- */
+  --mint-400: #35e0bd;
+  --mint-500: #22c9a8;
+  --mint-600: #12a98c;
+  --blue-400: #63a4ff;
+  --blue-500: #3b82f6;
+  --blue-600: #2563eb;
+  --lime-400: #cdf551;
+  --lime-500: #b6e12f;
+  --coral-400: #ff7a90;
+  --coral-500: #f43f5e;
+
+  /* --- 밝은 카드 계열 --- */
+  --white: #ffffff;
+  --paper-50: #f7fafd;
+  --paper-100: #eef4fb;
+  --paper-200: #e2ebf6;
+  --paper-300: #cfdcec;
+
+  /* --- 텍스트 --- */
+  --ink-900: #0e1f42;
+  --ink-700: #294066;
+  --ink-500: #5c718f;
+  --ink-400: #7a90ad;
+  --on-navy: #eaf2ff;
+  --on-navy-dim: #93a9c9;
+
+  /* --- 그라디언트 --- */
+  --grad-cta: linear-gradient(95deg, #6ee7a8 0%, #35d3c0 42%, #4f97f7 100%);
+  --grad-mint: linear-gradient(135deg, #35e0bd 0%, #4f97f7 100%);
+  --grad-logo: linear-gradient(120deg, #cdf551 0%, #9be36a 100%);
+
+  /* --- 라운드 / 그림자 --- */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-2xl: 36px;
+  --r-pill: 999px;
+
+  --sh-card: 0 18px 44px rgba(6, 18, 40, 0.16), 0 2px 8px rgba(6, 18, 40, 0.06);
+  --sh-soft: 0 8px 22px rgba(14, 31, 66, 0.08);
+  --sh-tile: 0 4px 14px rgba(14, 31, 66, 0.07);
+  --sh-cta: 0 14px 30px rgba(53, 200, 190, 0.36);
+  --sh-glow-mint: 0 0 0 4px rgba(53, 224, 189, 0.16);
+
+  /* --- 셸 치수 --- */
+  --sidebar-w: 236px;
+  --topbar-h: 68px;
+  --stepnav-h: 76px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: #061125;
+  background-image: radial-gradient(
+      1100px 640px at 16% -12%,
+      rgba(30, 66, 128, 0.75) 0%,
+      transparent 62%
+    ),
+    linear-gradient(162deg, #0a1730 0%, #050d1e 100%);
+  color: var(--on-navy);
+  font-family: var(--font-noto-sans-kr), "Noto Sans KR", "Apple SD Gothic Neo",
+    "Malgun Gothic", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--mint-400);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* 스크롤바 — 네이비 셸에 맞춘 밝은 톤 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 191, 255, 0.3) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(148, 191, 255, 0.28);
+  border-radius: 99px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}

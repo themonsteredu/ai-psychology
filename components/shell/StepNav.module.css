@@ -1,0 +1,186 @@
+.wrap {
+  grid-area: nav;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: var(--stepnav-h);
+  padding: 10px 22px 16px;
+}
+
+.bar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 9px 20px 9px 10px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(180deg, #0c1a37 0%, #091530 100%);
+  box-shadow: inset 0 0 0 1px var(--navy-line), 0 10px 26px rgba(3, 10, 24, 0.42);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- 진행도 칩 --- */
+.progressChip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: rgba(148, 191, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(148, 191, 255, 0.2);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--on-navy);
+  white-space: nowrap;
+}
+
+.star {
+  color: var(--lime-400);
+  fill: rgba(205, 245, 81, 0.32);
+}
+
+.progressPct {
+  color: var(--mint-400);
+}
+
+/* --- 단계 --- */
+.steps {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.connector {
+  flex: 1;
+  min-width: 14px;
+  height: 2px;
+  margin: 0 8px;
+  border-radius: 2px;
+  background: rgba(148, 191, 255, 0.2);
+}
+
+.connectorDone {
+  background: linear-gradient(90deg, var(--mint-500), var(--blue-400));
+}
+
+.stepBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 10px 4px 4px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  transition: background 0.18s ease;
+}
+
+.stepBtn:hover {
+  background: rgba(148, 191, 255, 0.1);
+}
+
+.stepNo {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.stepLabel {
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+/* 상태별 */
+.todo .stepNo {
+  color: var(--on-navy-dim);
+  box-shadow: inset 0 0 0 1.6px rgba(148, 191, 255, 0.28);
+}
+.todo .stepLabel {
+  color: var(--on-navy-dim);
+  opacity: 0.75;
+}
+
+.current .stepNo {
+  color: #04121f;
+  background: var(--grad-mint);
+  box-shadow: 0 0 0 4px rgba(53, 224, 189, 0.18), 0 0 18px rgba(53, 224, 189, 0.6);
+}
+.current .stepLabel {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.done .stepNo {
+  color: var(--mint-400);
+  box-shadow: inset 0 0 0 1.6px rgba(53, 224, 189, 0.62);
+  background: rgba(53, 224, 189, 0.12);
+}
+.done .stepLabel {
+  color: var(--on-navy);
+}
+
+/* --- 탐색 노트 플로팅 버튼 --- */
+.noteBtn {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 74px;
+  padding: 10px 6px;
+  border-radius: var(--r-lg);
+  background: var(--white);
+  color: var(--blue-600);
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: var(--sh-soft), 0 10px 24px rgba(3, 10, 24, 0.4);
+  transition: transform 0.18s ease;
+}
+
+.noteBtn:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 1080px) {
+  .wrap {
+    padding: 8px 14px 14px;
+  }
+  .stepLabel {
+    display: none;
+  }
+  .steps {
+    flex: none;
+  }
+  .step {
+    flex: none;
+  }
+}
+
+@media (max-width: 780px) {
+  .progressLabel {
+    display: none;
+  }
+  .noteBtn {
+    width: 58px;
+    font-size: 10px;
+  }
+}
