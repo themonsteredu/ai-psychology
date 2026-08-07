@@ -20,17 +20,34 @@
   border-right: 1px solid var(--paper-200);
 }
 
-/* 상담실 배경 — 말풍선 가독성을 위해 흐리게 깔기만 한다. */
-.roomBg {
+/* 상담실 배경 — 방 + 그 안에 앉은 민서를 한 겹으로 묶어
+   말풍선 가독성을 위해 함께 흐리게 깐다. */
+.room {
   position: absolute;
   inset: 0;
-  object-fit: cover;
   opacity: 0.34;
   filter: saturate(0.85);
   pointer-events: none;
 }
 
-.chatPane > *:not(.roomBg) {
+.roomBg.roomBg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+/* 방 안에 앉아 있는 정도로만 보이게 — 말풍선이 주인공이다. */
+.roomMinseo.roomMinseo {
+  position: absolute;
+  left: -3%;
+  bottom: 0;
+  width: auto;
+  height: 52%;
+  object-fit: contain;
+  object-position: bottom left;
+}
+
+.chatPane > *:not(.room) {
   position: relative;
   z-index: 1;
 }
@@ -45,17 +62,13 @@
 }
 
 .avatar {
+  flex: none;
   width: 42px;
   height: 42px;
   border-radius: 50%;
   overflow: hidden;
+  background: var(--paper-100);
   box-shadow: 0 0 0 2px rgba(53, 224, 189, 0.5);
-}
-
-.avatar svg {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 
 .chatWho {

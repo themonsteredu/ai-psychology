@@ -45,24 +45,26 @@ export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
     <section className={s.board} aria-label="상담 대화">
       {/* ---------------- 좌: 대화 ---------------- */}
       <div className={s.chatPane}>
-        <AssetImage
-          src="/assets/scene/counseling-room"
-          alt=""
-          tone="mint"
-          bare
-          className={s.roomBg}
-        />
+        {/* 상담실 배경 — 방과 그 안에 앉은 민서를 한 겹으로 깔고,
+            말풍선은 그 위에 얹는다. */}
+        <span className={s.room} aria-hidden="true">
+          <AssetImage
+            src="/assets/scene/counseling-room"
+            alt=""
+            bare
+            className={s.roomBg}
+          />
+          <AssetImage
+            src="/assets/char/minseo-talk"
+            alt=""
+            bare
+            className={s.roomMinseo}
+          />
+        </span>
 
         <header className={s.chatHead}>
           <span className={s.avatar} aria-hidden="true">
-            <svg viewBox="0 0 44 44">
-              <circle cx="22" cy="22" r="22" fill="#f6dfcd" />
-              <path d="M22 4c10 0 15 7 15 17 0 4-1 8-2 10H9c-1-2-2-6-2-10C7 11 12 4 22 4Z" fill="#2f2b3f" />
-              <circle cx="22" cy="23" r="11" fill="#fbe3cb" />
-              <circle cx="18" cy="22" r="1.9" fill="#2f2b3f" />
-              <circle cx="26" cy="22" r="1.9" fill="#2f2b3f" />
-              <path d="M19.4 27.4c1.7 1.2 3.5 1.2 5.2 0" stroke="#c4705f" strokeWidth="1.7" fill="none" strokeLinecap="round" />
-            </svg>
+            <AssetImage src="/assets/avatar/minseo" alt="" tone="mint" />
           </span>
           <span className={s.chatWho}>
             <b>민서</b>

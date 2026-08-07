@@ -20,15 +20,23 @@
 
 | | |
 | --- | --- |
-| ✅ 들어옴 | `scene/hallway` · `scene/counseling-room` · `scene/classroom` · `scene/rooftop` · `char/minseo-full` |
-| ⬜ 필요 | `char/friends-full` · `char/minseo-talk` · `char/minseo-happy` · `avatar/minseo` · `avatar/ai-helper` · `career/*` 4종 · `ui/trophy` |
+| ✅ 들어옴 | `scene/hallway` · `scene/counseling-room` · `scene/classroom` · `scene/rooftop` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` |
+| ⬜ 필요 | `career/*` 4종 · `ui/trophy` · `avatar/ai-helper` |
 
-> `char/friends-full` 이 가장 급합니다. 01·02 화면에 친구 3명 자리가
-> 비어 있어서, 단서 「친구들의 반응」·「친구들과의 거리」가 그림 없이
-> 텍스트로만 설명되는 상태입니다.
+> 남은 것 중에서는 **`career/*` 4종**이 가장 눈에 띕니다.
+> 06 결과 확인 화면의 진로 카드 4장이 아직 그라디언트 플레이스홀더입니다.
 >
 > `scene/classroom` · `scene/rooftop` 은 아직 쓰는 화면이 없습니다.
 > 확장 사례용으로 넣어 두었습니다.
+
+### 받은 원본을 손본 내용
+
+- 인물 컷아웃은 배경이 투명하지만 알파가 낮은 헤이즈가 캔버스 전체에
+  퍼져 있어, 알파 40 미만을 잘라내고 인물 기준으로 크롭했습니다.
+- `char/minseo-talk` 에는 소파가 반투명하게 함께 그려져 있습니다.
+  임계값으로는 지워지지 않아, 어두운 배경 대신 03 상담실 배경 레이어에
+  얹어 방 배경과 섞이도록 배치했습니다.
+- `avatar/minseo` 는 상반신 원본에서 얼굴 중심 정사각형으로 잘랐습니다.
 
 ## scene/ — 배경 (가로형 1536×1024)
 
