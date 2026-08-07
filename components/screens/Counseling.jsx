@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import AssetImage from "@/components/ui/AssetImage";
 import { IconArrowRight, IconBulb, IconCheck, IconSend } from "@/components/ui/Icons";
 import { DIALOGUE, QUALITY_META } from "@/lib/caseData";
 import s from "./Counseling.module.css";
@@ -44,6 +45,14 @@ export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
     <section className={s.board} aria-label="상담 대화">
       {/* ---------------- 좌: 대화 ---------------- */}
       <div className={s.chatPane}>
+        <AssetImage
+          src="/assets/scene/counseling-room"
+          alt=""
+          tone="mint"
+          bare
+          className={s.roomBg}
+        />
+
         <header className={s.chatHead}>
           <span className={s.avatar} aria-hidden="true">
             <svg viewBox="0 0 44 44">

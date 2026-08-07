@@ -12,11 +12,27 @@
 /* ------------------------------------------------------- 좌: 대화 */
 
 .chatPane {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   background: linear-gradient(180deg, #eef5fb 0%, #e6eff8 100%);
   border-right: 1px solid var(--paper-200);
+}
+
+/* 상담실 배경 — 말풍선 가독성을 위해 흐리게 깔기만 한다. */
+.roomBg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  opacity: 0.34;
+  filter: saturate(0.85);
+  pointer-events: none;
+}
+
+.chatPane > *:not(.roomBg) {
+  position: relative;
+  z-index: 1;
 }
 
 .chatHead {

@@ -42,9 +42,9 @@ export default function ClueHunt({ found, onFind, onNext, onBack }) {
             <button
               key={c.id}
               type="button"
-              className={`${s.hotspot} ${isFound ? s.hotFound : ""} ${
-                active === c.id ? s.hotActive : ""
-              }`}
+              className={`${s.hotspot} ${c.flip ? s.hotFlip : ""} ${
+                isFound ? s.hotFound : ""
+              } ${active === c.id ? s.hotActive : ""}`}
               style={{ left: `${c.x}%`, top: `${c.y}%` }}
               onClick={() => pick(c)}
               aria-label={`단서: ${c.label}`}

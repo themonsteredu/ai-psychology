@@ -60,10 +60,12 @@
 }
 
 /* --- 핫스팟 --- */
+/* left/top 은 항상 원형 마커(38px)의 중심을 가리킨다.
+   라벨이 펼쳐져도 마커가 밀리지 않도록 폭이 아닌 고정값으로 보정한다. */
 .hotspot {
   position: absolute;
   z-index: 4;
-  transform: translate(-50%, -50%);
+  transform: translate(-19px, -19px);
   display: flex;
   align-items: center;
   gap: 0;
@@ -129,6 +131,23 @@
 .hotActive .hotLabel {
   max-width: 160px;
   padding: 0 14px 0 8px;
+}
+
+/* 장면 오른쪽 끝에 붙는 단서는 라벨을 왼쪽으로 펼쳐 잘리지 않게 한다. */
+.hotFlip {
+  flex-direction: row-reverse;
+  transform: translate(calc(-100% + 19px), -19px);
+}
+
+.hotFlip::after {
+  left: auto;
+  right: 19px;
+  margin: -19px -19px 0 0;
+}
+
+.hotFlip:hover .hotLabel,
+.hotFlip.hotActive .hotLabel {
+  padding: 0 8px 0 14px;
 }
 
 .hotFound .hotDot {

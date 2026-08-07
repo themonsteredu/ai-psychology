@@ -42,7 +42,7 @@ export default function Result({ scores, onRestart, onBack }) {
 
         <span className={s.trophy}>
           <AssetImage
-            src="/assets/ui/trophy.png"
+            src="/assets/ui/trophy"
             alt="트로피"
             tone="lime"
             fallback={<IconTrophy size={40} />}
@@ -65,7 +65,7 @@ export default function Result({ scores, onRestart, onBack }) {
 
         <span className={s.hero}>
           <AssetImage
-            src="/assets/char/minseo-happy.png"
+            src="/assets/char/minseo-happy"
             alt="밝게 웃는 민서"
             tone="mint"
             fallback={<IconSparkle size={44} />}
