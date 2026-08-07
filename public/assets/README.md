@@ -20,14 +20,18 @@
 
 | | |
 | --- | --- |
-| ✅ 들어옴 | `scene/hallway` · `scene/counseling-room` · `scene/classroom` · `scene/rooftop` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` |
-| ⬜ 필요 | `career/*` 4종 · `ui/trophy` · `avatar/ai-helper` |
+| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` |
+| 📦 넣어만 둠 | `scene/classroom` · `scene/rooftop` · `avatar/friend-boy` · `avatar/seohyun` |
+| ⬜ 필요 | `career/*` 4종 · `ui/trophy` |
 
 > 남은 것 중에서는 **`career/*` 4종**이 가장 눈에 띕니다.
 > 06 결과 확인 화면의 진로 카드 4장이 아직 그라디언트 플레이스홀더입니다.
+> `ui/trophy` 는 지금 라인 아이콘으로 대체돼 있어 티가 덜 납니다.
 >
-> `scene/classroom` · `scene/rooftop` 은 아직 쓰는 화면이 없습니다.
-> 확장 사례용으로 넣어 두었습니다.
+> 「넣어만 둠」은 파일은 있지만 아직 쓰는 화면이 없다는 뜻입니다.
+> `avatar/friend-boy` · `avatar/seohyun` 은 시안의 「새로운 메시지」 화면
+> (`design-reference/06-twist.webp`)처럼 친구가 등장하는 단계를 만들 때
+> 쓰면 됩니다.
 
 ### 받은 원본을 손본 내용
 

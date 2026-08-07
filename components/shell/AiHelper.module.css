@@ -57,10 +57,14 @@
 }
 
 .robot {
+  display: block;
   width: 78px;
-  height: 75px;
+  height: 78px;
   margin-top: 8px;
-  filter: drop-shadow(0 8px 16px rgba(53, 224, 189, 0.28));
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(53, 224, 189, 0.28),
+    0 0 0 2px rgba(53, 224, 189, 0.45);
   animation: bob 3.4s ease-in-out infinite;
 }
 
