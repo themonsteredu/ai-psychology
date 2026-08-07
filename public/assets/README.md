@@ -20,7 +20,7 @@
 
 | | |
 | --- | --- |
-| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` |
+| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` |
 | 📦 넣어만 둠 | `scene/classroom` · `scene/rooftop` · `avatar/friend-boy` · `avatar/seohyun` |
 | ⬜ 필요 | `career/*` 4종 · `ui/trophy` |
 

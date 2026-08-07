@@ -1,5 +1,6 @@
 "use client";
 
+import AssetImage from "@/components/ui/AssetImage";
 import { IconBell, IconChevronDown, IconFlame, IconSparkle } from "@/components/ui/Icons";
 import s from "./TopBar.module.css";
 
@@ -47,15 +48,7 @@ export default function TopBar({ points = 1260, level = 3, levelPct = 62, onMenu
 
         <button type="button" className={s.profile} aria-label="내 프로필">
           <span className={s.avatar} aria-hidden="true">
-            <svg viewBox="0 0 40 40" role="presentation">
-              <circle cx="20" cy="20" r="20" fill="#f6dfcd" />
-              <path d="M20 4c9 0 13 6 13 15 0 4-1 7-2 9H9c-1-2-2-5-2-9C7 10 11 4 20 4Z" fill="#2f2b3f" />
-              <circle cx="20" cy="21" r="10" fill="#fbe3cb" />
-              <circle cx="16.4" cy="20" r="1.7" fill="#2f2b3f" />
-              <circle cx="23.6" cy="20" r="1.7" fill="#2f2b3f" />
-              <path d="M17.6 25c1.6 1.2 3.2 1.2 4.8 0" stroke="#c4705f" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-              <path d="M20 31c6 0 11 3 12 9H8c1-6 6-9 12-9Z" fill="#2b5183" />
-            </svg>
+            <AssetImage src="/assets/avatar/user" alt="" tone="mint" />
           </span>
           <IconChevronDown size={15} className={s.chev} />
         </button>
