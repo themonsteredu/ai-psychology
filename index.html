@@ -9,13 +9,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./mockup-mode.css" />
+  <link rel="stylesheet" href="/mockup-mode.css?v=4" />
 </head>
 <body>
   <main class="app" aria-label="마음 SIGNAL LAB 진로체험">
-    <section id="screen" class="screen" aria-live="polite"></section>
+    <section id="screen" class="screen" aria-live="polite">
+      <div class="mockup-stage boot-stage">
+        <img class="boot-image" src="/assets/mockups/01-intro.webp?v=4" alt="마음 SIGNAL LAB CASE 01 시작 화면" />
+        <div class="boot-status">화면을 불러오는 중…</div>
+      </div>
+    </section>
   </main>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./mockup-mode.js"></script>
+  <noscript><div class="noscript">JavaScript를 켜면 단서 찾기와 상담 선택 활동을 진행할 수 있어요.</div></noscript>
+  <script src="/mockup-mode.js?v=4"></script>
 </body>
 </html>
