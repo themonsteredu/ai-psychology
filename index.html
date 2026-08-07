@@ -3,61 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#071629" />
-  <meta name="description" content="AI 시대 청소년상담사 진로체험 웹앱 프로토타입" />
+  <meta name="theme-color" content="#071528" />
+  <meta name="description" content="AI 시대 청소년상담사 진로체험 웹앱 마음 SIGNAL LAB" />
   <title>마음 SIGNAL LAB</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./design-v2.css" />
-  <link rel="stylesheet" href="./design-v3.css" />
+  <link rel="stylesheet" href="./mockup-mode.css" />
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand-block">
-        <div class="brand-mark">⌁</div>
-        <div>
-          <div class="brand-title">마음 <span>SIGNAL LAB</span></div>
-          <div class="brand-sub">AI 시대, 마음을 읽고 연결하는 상담 탐정</div>
-        </div>
-      </div>
-
-      <nav class="nav-list" aria-label="주요 메뉴">
-        <button class="nav-item active" data-nav="case">오늘의 CASE</button>
-        <button class="nav-item" data-nav="note">탐정 노트</button>
-        <button class="nav-item" data-nav="signal">시그널 학습</button>
-        <button class="nav-item" data-nav="tool">상담 도구함</button>
-      </nav>
-
-      <div class="helper-card">
-        <div class="helper-face">AI</div>
-        <div>
-          <strong>AI 도우미</strong>
-          <p id="helperText">첫 사건을 시작해 볼까?</p>
-        </div>
-      </div>
-    </aside>
-
-    <main class="main-stage">
-      <header class="topbar">
-        <div class="case-heading">
-          <span class="case-badge">CASE 01</span>
-          <span id="caseTitle">친구 사이, 무슨 일이 생긴 걸까?</span>
-        </div>
-        <div class="status-cluster">
-          <div class="status-pill">시그널 <strong id="signalScore">0</strong></div>
-          <div class="status-pill">진행 <strong id="progressText">1/8</strong></div>
-        </div>
-      </header>
-
-      <section id="screen" class="screen" aria-live="polite"></section>
-      <footer class="stepper" id="stepper" aria-label="진행 단계"></footer>
-    </main>
-  </div>
-
-  <div id="toast" class="toast" role="status"></div>
-  <script src="./app.js"></script>
+  <main class="app" aria-label="마음 SIGNAL LAB 진로체험">
+    <section id="screen" class="screen" aria-live="polite"></section>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./mockup-mode.js"></script>
 </body>
 </html>
