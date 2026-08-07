@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import AssetImage from "@/components/ui/AssetImage";
 import {
   IconAlert,
   IconArrowRight,
@@ -52,14 +53,12 @@ export default function AiReport({ marks, onMark, onReset, onNext, onBack }) {
       <div className={s.docPane}>
         <header className={s.docHead}>
           <span className={s.bot} aria-hidden="true">
-            <svg viewBox="0 0 44 44">
-              <rect x="6" y="10" width="32" height="26" rx="11" fill="#0f2549" />
-              <rect x="10" y="14" width="24" height="18" rx="9" fill="#0a1a35" />
-              <circle cx="17.5" cy="23" r="3.1" fill="#35e0bd" />
-              <circle cx="26.5" cy="23" r="3.1" fill="#35e0bd" />
-              <path d="M22 4v6" stroke="#63a4ff" strokeWidth="2" strokeLinecap="round" />
-              <circle cx="22" cy="4" r="2.6" fill="#cdf551" />
-            </svg>
+            <AssetImage
+              src="/assets/avatar/ai-helper"
+              alt=""
+              tone="blue"
+              fallback={<IconSparkle size={20} />}
+            />
           </span>
           <span className={s.docWho}>
             <b>{AI_REPORT.title}</b>
