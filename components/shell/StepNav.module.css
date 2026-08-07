@@ -58,11 +58,18 @@
 }
 
 /* --- 단계 --- */
+/* 단계가 늘어나도 라벨이 겹치지 않도록, 넘치면 가로로 스크롤한다. */
 .steps {
   display: flex;
   align-items: center;
   flex: 1;
   min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.steps::-webkit-scrollbar {
+  display: none;
 }
 
 .step {
@@ -74,9 +81,9 @@
 
 .connector {
   flex: 1;
-  min-width: 14px;
+  min-width: 8px;
   height: 2px;
-  margin: 0 8px;
+  margin: 0 5px;
   border-radius: 2px;
   background: rgba(148, 191, 255, 0.2);
 }
@@ -165,6 +172,14 @@
 
 .noteBtn:hover {
   transform: translateY(-3px);
+}
+
+/* 7단계라 라벨을 전부 펼치면 넓은 화면에서도 서로 붙는다.
+   좁아지면 현재 단계만 라벨을 남기고 나머지는 번호로 줄인다. */
+@media (max-width: 1360px) {
+  .stepBtn:not(.current) .stepLabel {
+    display: none;
+  }
 }
 
 @media (max-width: 1080px) {

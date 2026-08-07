@@ -234,6 +234,23 @@ export function IconBulb(props) {
   );
 }
 
+export function IconMail(props) {
+  return (
+    <Svg {...props}>
+      <rect x="3.4" y="5.4" width="17.2" height="13.2" rx="2.4" />
+      <path d="m4.2 7.6 7.8 5.4 7.8-5.4" />
+    </Svg>
+  );
+}
+
+export function IconPaperclip(props) {
+  return (
+    <Svg {...props}>
+      <path d="M17.6 11.2 12 16.8a3.6 3.6 0 0 1-5.1-5.1l6.6-6.6a2.4 2.4 0 0 1 3.4 3.4l-6.6 6.6a1.2 1.2 0 0 1-1.7-1.7l5.8-5.8" />
+    </Svg>
+  );
+}
+
 export function IconAlert(props) {
   return (
     <Svg {...props}>

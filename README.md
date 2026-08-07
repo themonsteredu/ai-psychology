@@ -42,16 +42,18 @@ npm run build   # 프로덕션 빌드
 ```
 AppShell
 ├── TopBar        로고 "마음 SIGNAL LAB" · 태그라인 · 포인트/레벨 · 알림 · 프로필
-├── Sidebar       오늘의 CASE / 개별 노트 / 시그널 보드 / AI 리포트 / 상담 전략 / 진로 리포트
+├── Sidebar       오늘의 CASE / 개별 노트 / 시그널 보드 / AI 리포트 /
+│                 새 메시지(NEW) / 상담 전략 / 진로 리포트
 │   └── AiHelper  좌하단 AI 도우미 (말풍선 + 로봇 + ON 상태)
 ├── main          현재 단계 화면
 └── StepNav       01 CASE 안내 → 02 단서 탐색 → 03 시그널 분석 → 04 AI 리포트
-                  → 05 상담 전략 → 06 결과 확인 + 우측 "탐색 노트" 버튼
+                  → 05 새 메시지 → 06 상담 전략 → 07 결과 확인
+                  + 우측 "탐색 노트" 버튼
 ```
 
 ## 현재 구현 범위
 
-6단계 전부 상호작용까지 구현되어 있습니다.
+7단계 전부 상호작용까지 구현되어 있습니다.
 
 | 단계 | 화면 | 컴포넌트 | 내용 |
 | --- | --- | --- | --- |
@@ -59,24 +61,28 @@ AppShell
 | 02 | **단서 탐색** | `screens/ClueHunt.jsx` | 복도 장면 위 클릭형 핫스팟 5개, 단서 상세(관찰/인사이트), 수집 목록, 힌트, 탐지율 게이지 |
 | 03 | **상담 대화** | `screens/Counseling.jsx` | 메신저형 UI, 3턴 선택지 대화, 반응 품질 피드백(좋은/무난한/아쉬운), 공감 점수 |
 | 04 | **AI 리포트 검토** | `screens/AiReport.jsx` | AI가 쓴 8문장을 **사실 / 추론 / 더 확인**으로 분류. 문장마다 왜 그런지 피드백, 검토 진행률 |
-| 05 | **상담 전략** | `screens/Strategy.jsx` | 도움 카드 6장을 **오늘 바로 / 이번 주 안에 / 어른과 함께** 슬롯에 배치해 상담 계획표 완성 |
-| 06 | **결과 확인** | `screens/Result.jsx` | 5개 역량 원형 게이지 + 관련 진로 카드 4장. 점수는 전부 실제 플레이 기록에서 계산 |
+| 05 | **새로운 메시지** | `screens/NewMessage.jsx` | 판단을 끝낸 뒤 서현·준호에게서 도착하는 반전. 기존 문장 4개를 **그대로 / 흔들림**으로 다시 판단 |
+| 06 | **상담 전략** | `screens/Strategy.jsx` | 도움 카드 6장을 **오늘 바로 / 이번 주 안에 / 어른과 함께** 슬롯에 배치해 상담 계획표 완성 |
+| 07 | **결과 확인** | `screens/Result.jsx` | 5개 역량 원형 게이지 + 관련 진로 카드 4장. 점수는 전부 실제 플레이 기록에서 계산 |
 | — | **탐색 노트** | `screens/NoteDrawer.jsx` | 모은 단서 + 상담 기록을 모아 보는 우측 드로어 |
 | — | **복도 장면** | `scene/HallwayScene.jsx` | 복도 배경 이미지 위에 인물 컷아웃을 % 좌표로 합성. 단서 핫스팟도 같은 % 좌표계라 패널 비율이 바뀌어도 어긋나지 않음 |
 
 > 참고: 상단 단계 네비게이션의 `03 시그널 분석`에 상담 대화 화면이 들어갑니다.
 > (대화를 통해 시그널을 수집 → 정리하는 흐름)
 
+> 05 새로운 메시지의 핵심은 «새 정보는 사실을 지우지 않지만 추측은 흔든다»입니다.
+> 04에서 사실/추론을 나눈 경험을 한 번 더 뒤집어 확인하게 합니다.
+
 ### 역량 점수 계산 (`app/page.jsx`)
 
-06 결과 화면의 게이지는 임의의 값이 아니라 플레이 기록에서 나옵니다.
+07 결과 화면의 게이지는 임의의 값이 아니라 플레이 기록에서 나옵니다.
 
 | 역량 | 계산 |
 | --- | --- |
 | 공감력 | 대화 선택지 점수 합 ÷ 만점(60) |
 | 관찰력 | 찾은 단서 수 ÷ 전체 단서 수 |
 | 질문력 | 선택지 품질 평균 (좋은 100 / 무난 65 / 아쉬운 30) |
-| 판단력 | 추천 시점과 일치한 도움 카드 수 ÷ 6 |
+| 판단력 | (추천 시점과 일치한 도움 카드 ÷ 6, 다시 판단 정답 ÷ 4)의 평균 |
 | AI 리터러시 | 정확히 분류한 리포트 문장 수 ÷ 8 |
 
 ## 반응형
@@ -100,10 +106,11 @@ AppShell
 app/            layout.jsx · page.jsx(상태 오케스트레이션) · globals.css(토큰)
 components/
   shell/        AppShell · TopBar · Sidebar · AiHelper · StepNav
-  screens/      CaseIntro · ClueHunt · Counseling · AiReport · Strategy · Result · NoteDrawer
-  scene/        HallwayScene (복도 일러스트 SVG)
+  screens/      CaseIntro · ClueHunt · Counseling · AiReport · NewMessage · Strategy ·
+                Result · NoteDrawer
+  scene/        HallwayScene (복도 배경 + 인물 컷아웃 합성)
   ui/           Icons (라인 아이콘 세트) · AssetImage (이미지 에셋 + 폴백)
-lib/            caseData.js — 사례 텍스트·단서·대화·리포트·전략·진로 데이터
+lib/            caseData.js — 사례 텍스트·단서·대화·리포트·반전·전략·진로 데이터
 public/assets/  일러스트 에셋 (README.md = 파일명 규약, PROMPTS.md = 생성 프롬프트)
 design-reference/  최초 시안 이미지 (참조용, 앱에서 사용하지 않음)
 ```

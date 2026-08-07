@@ -26,7 +26,7 @@ function subjectParticle(word) {
   return isHangul && (code - 0xac00) % 28 !== 0 ? "이" : "가";
 }
 
-/** 06 결과 확인 — 체험에서 쓴 직무 역량과 관련 진로를 보여준다. */
+/** 07 결과 확인 — 체험에서 쓴 직무 역량과 관련 진로를 보여준다. */
 export default function Result({ scores, onRestart, onBack }) {
   const top = [...COMPETENCIES].sort(
     (a, b) => (scores[b.id] ?? 0) - (scores[a.id] ?? 0)
@@ -38,7 +38,7 @@ export default function Result({ scores, onRestart, onBack }) {
       <div className={s.heroPane}>
         <span className={s.confetti} aria-hidden="true" />
 
-        <span className={s.stepBadge}>STEP 06 · 활동 완료</span>
+        <span className={s.stepBadge}>STEP 07 · 활동 완료</span>
 
         <span className={s.trophy}>
           <AssetImage

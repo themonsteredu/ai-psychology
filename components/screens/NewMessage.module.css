@@ -1,0 +1,527 @@
+.board {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--r-2xl);
+  background: var(--white);
+  box-shadow: var(--sh-card);
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------- 좌: 메시지 */
+
+.msgPane {
+  position: relative;
+  min-width: 0;
+  padding: 22px 22px 24px;
+  background: linear-gradient(180deg, #eef5fb 0%, #e6eff8 100%);
+}
+
+/* 그룹 프로젝트가 있었던 교실 — 흐리게 깔기만 한다. */
+.roomBg.roomBg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  opacity: 0.22;
+  filter: saturate(0.8);
+  pointer-events: none;
+}
+
+.msgInner {
+  position: sticky;
+  top: 20px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px 17px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(150deg, #0e2246 0%, #071129 100%);
+  box-shadow: var(--sh-soft);
+}
+
+.alertIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(205, 245, 81, 0.16);
+  color: var(--lime-400);
+}
+
+.alertText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.alertText small {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--lime-400);
+}
+
+.alertText b {
+  font-size: 15px;
+  font-weight: 900;
+  color: #fff;
+  word-break: keep-all;
+}
+
+.alertText > span {
+  font-size: 11.5px;
+  color: var(--on-navy-dim);
+  word-break: keep-all;
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+
+.msg {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 15px 16px 16px;
+  border-radius: var(--r-lg);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--sh-tile);
+}
+
+.msgHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.msgAvatar {
+  flex: none;
+  display: block;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--paper-100);
+  box-shadow: 0 0 0 2px rgba(53, 224, 189, 0.45);
+}
+
+.msgWho {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.msgWho b {
+  font-size: 13.5px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.msgWho small {
+  font-size: 10.5px;
+  color: var(--ink-400);
+}
+
+.msgTime {
+  margin-left: auto;
+  font-size: 10.5px;
+  color: var(--ink-400);
+  white-space: nowrap;
+}
+
+.bubble {
+  padding: 11px 14px;
+  border-radius: 4px 16px 16px 16px;
+  background: var(--paper-50);
+  box-shadow: inset 0 0 0 1px var(--paper-200);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-900);
+  word-break: keep-all;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+  padding: 11px 13px;
+  border-radius: var(--r-md);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1.4px var(--paper-200);
+  text-align: left;
+  transition: box-shadow 0.16s ease;
+}
+
+.file:hover {
+  box-shadow: inset 0 0 0 1.4px var(--mint-500);
+}
+
+.fileOpen {
+  box-shadow: inset 0 0 0 1.6px var(--mint-500);
+}
+
+.fileIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(244, 63, 94, 0.12);
+  color: var(--coral-500);
+}
+
+.fileBody {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.fileBody b {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-900);
+}
+
+.fileBody small {
+  font-size: 10.5px;
+  color: var(--ink-400);
+}
+
+.fileCta {
+  margin-left: auto;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  background: var(--paper-100);
+  color: var(--ink-700);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.fileNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 11px 13px;
+  border-radius: var(--r-md);
+  background: rgba(34, 201, 168, 0.12);
+  color: #0d7a63;
+  font-size: 11.5px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.fileNote svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+/* ------------------------------------------------------- 우: 다시 보기 */
+
+.toolPane {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  min-width: 0;
+  padding: 26px 26px 24px;
+  background: var(--white);
+}
+
+.stepBadge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: rgba(244, 63, 94, 0.13);
+  color: #c32444;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.toolTitle {
+  margin-top: 10px;
+  font-size: clamp(20px, 2.1vw, 25px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--ink-900);
+}
+
+.toolSub {
+  margin-top: 6px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progressLabel {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-500);
+  white-space: nowrap;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: var(--paper-200);
+  overflow: hidden;
+}
+
+.progressFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--grad-mint);
+  transition: width 0.3s ease;
+}
+
+.progressVal {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--ink-900);
+  white-space: nowrap;
+}
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.check {
+  padding: 14px 15px;
+  border-radius: var(--r-md);
+  background: var(--paper-50);
+  box-shadow: inset 0 0 0 1.4px var(--paper-200);
+  transition: background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.checkOn {
+  background: var(--white);
+  box-shadow: var(--sh-tile), inset 0 0 0 1.4px rgba(53, 224, 189, 0.35);
+}
+
+.checkText {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--ink-900);
+  word-break: keep-all;
+}
+
+.verdicts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.verdict {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1.3px var(--paper-300);
+  text-align: left;
+  transition: background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.verdict b {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.verdict small {
+  font-size: 10px;
+  line-height: 1.45;
+  color: var(--ink-400);
+  word-break: keep-all;
+}
+
+.verdict:hover {
+  background: var(--paper-50);
+}
+
+.verdict.blue.verdictOn {
+  background: rgba(99, 164, 255, 0.14);
+  box-shadow: inset 0 0 0 1.8px var(--blue-500);
+}
+.verdict.coral.verdictOn {
+  background: rgba(255, 122, 144, 0.14);
+  box-shadow: inset 0 0 0 1.8px var(--coral-500);
+}
+
+.why {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 9px;
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.why svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+.whyGood {
+  background: rgba(34, 201, 168, 0.12);
+  color: #0d7a63;
+}
+
+.whyMiss {
+  background: rgba(182, 225, 47, 0.16);
+  color: #5f7d0c;
+}
+
+.doneCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 16px 17px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(140deg, rgba(53, 224, 189, 0.14), rgba(99, 164, 255, 0.14));
+  box-shadow: inset 0 0 0 1.4px rgba(53, 224, 189, 0.3);
+}
+
+.doneCard h3 {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.doneCard p {
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  color: var(--ink-700);
+  font-size: 11.5px;
+  font-weight: 800;
+  box-shadow: var(--sh-tile);
+}
+
+/* 액션 */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.ghost {
+  flex: none;
+  padding: 15px 22px;
+  border-radius: var(--r-pill);
+  background: var(--paper-100);
+  color: var(--ink-700);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.16s ease;
+}
+
+.ghost:hover {
+  background: var(--paper-200);
+}
+
+.cta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 20px;
+  border-radius: var(--r-pill);
+  background: var(--grad-cta);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 900;
+  box-shadow: var(--sh-cta);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.cta:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.cta:disabled {
+  background: var(--paper-200);
+  color: var(--ink-400);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------- 반응형 */
+
+@media (max-width: 1080px) {
+  .board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* 세로 스택에서는 메시지가 위에 오므로 sticky 를 끈다. */
+  .msgInner {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .board {
+    border-radius: var(--r-xl);
+  }
+  .msgPane,
+  .toolPane {
+    padding: 20px 16px 22px;
+  }
+  .verdicts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .actions {
+    flex-direction: column-reverse;
+  }
+  .ghost {
+    width: 100%;
+  }
+}

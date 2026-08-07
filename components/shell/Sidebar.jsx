@@ -4,6 +4,7 @@ import {
   IconBoard,
   IconCareer,
   IconCase,
+  IconMail,
   IconNote,
   IconReport,
   IconStrategy,
@@ -17,6 +18,7 @@ const ICONS = {
   note: IconNote,
   board: IconBoard,
   report: IconReport,
+  mail: IconMail,
   strategy: IconStrategy,
   career: IconCareer,
 };

@@ -205,7 +205,7 @@ export default function AiReport({ marks, onMark, onReset, onNext, onBack }) {
             disabled={!done}
           >
             {done
-              ? "상담 전략 세우기"
+              ? "새 메시지 확인하기"
               : `${AI_REPORT.lines.length - markedCount}문장 더 검토하기`}
             <IconArrowRight size={18} />
           </button>

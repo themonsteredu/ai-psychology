@@ -26,7 +26,7 @@ const ICONS = {
 };
 
 /**
- * 05 상담 전략 — 도움 카드를 세 개의 시점 슬롯에 배치해 상담 계획을 만든다.
+ * 06 상담 전략 — 도움 카드를 세 개의 시점 슬롯에 배치해 상담 계획을 만든다.
  * plan: { [cardId]: slotId } — 상위(page)에서 보관해 결과 화면 점수로 이어진다.
  */
 export default function Strategy({ plan, onPlace, onReset, onNext, onBack }) {
@@ -52,7 +52,7 @@ export default function Strategy({ plan, onPlace, onReset, onNext, onBack }) {
         {/* 카드 목록이 길어져도 계획표가 화면에 남도록 sticky 처리 */}
         <div className={s.planInner}>
           <header className={s.planHead}>
-            <span className={s.stepBadge}>STEP 05</span>
+            <span className={s.stepBadge}>STEP 06</span>
             <h2 className={s.planTitle}>민서를 위한 상담 계획</h2>
             <p className={s.planSub}>
               오른쪽 도움 카드를 언제 할 일인지 골라 계획표에 채워 보세요.
