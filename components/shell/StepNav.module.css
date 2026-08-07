@@ -42,8 +42,15 @@
 }
 
 .star {
+  flex: none;
+  display: block;
+  width: 19px;
+  height: 19px;
   color: var(--lime-400);
-  fill: rgba(205, 245, 81, 0.32);
+}
+
+.star img {
+  object-fit: contain;
 }
 
 .progressPct {

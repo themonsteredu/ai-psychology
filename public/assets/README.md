@@ -20,13 +20,12 @@
 
 | | |
 | --- | --- |
-| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` |
+| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` |
 | 📦 넣어만 둠 | `scene/classroom` · `scene/rooftop` · `avatar/friend-boy` · `avatar/seohyun` |
-| ⬜ 필요 | `career/*` 4종 · `ui/trophy` |
+| ⬜ 필요 | `ui/trophy` |
 
-> 남은 것 중에서는 **`career/*` 4종**이 가장 눈에 띕니다.
-> 06 결과 확인 화면의 진로 카드 4장이 아직 그라디언트 플레이스홀더입니다.
-> `ui/trophy` 는 지금 라인 아이콘으로 대체돼 있어 티가 덜 납니다.
+> `ui/trophy` 하나만 남았습니다. 06 결과 확인 헤드라인의 트로피 자리로,
+> 지금은 라인 아이콘으로 대체돼 있어 크게 티가 나지는 않습니다.
 >
 > 「넣어만 둠」은 파일은 있지만 아직 쓰는 화면이 없다는 뜻입니다.
 > `avatar/friend-boy` · `avatar/seohyun` 은 시안의 「새로운 메시지」 화면

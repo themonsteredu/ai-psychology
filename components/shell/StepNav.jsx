@@ -1,5 +1,6 @@
 "use client";
 
+import AssetImage from "@/components/ui/AssetImage";
 import { IconCheck, IconNote, IconStar } from "@/components/ui/Icons";
 import { STEPS } from "@/lib/caseData";
 import s from "./StepNav.module.css";
@@ -11,7 +12,14 @@ export default function StepNav({ current, onSelect, onOpenNote, progress = 0 })
     <div className={s.wrap}>
       <nav className={s.bar} aria-label="CASE 진행 단계">
         <span className={s.progressChip}>
-          <IconStar size={15} className={s.star} />
+          <span className={s.star}>
+            <AssetImage
+              src="/assets/ui/badge-star"
+              alt=""
+              bare
+              fallback={<IconStar size={15} />}
+            />
+          </span>
           <span className={s.progressLabel}>CASE 진행도</span>
           <span className={s.progressPct}>{progress}%</span>
         </span>
