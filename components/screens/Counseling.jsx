@@ -6,7 +6,7 @@ import { DIALOGUE, QUALITY_META } from "@/lib/caseData";
 import s from "./Counseling.module.css";
 
 /** 03 상담 대화 — 메신저형 선택지 대화. */
-export default function Counseling({ log, onLog, onReset, onBack }) {
+export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
   const turn = DIALOGUE[log.length] ?? null;
   const done = log.length >= DIALOGUE.length;
   const feedRef = useRef(null);
@@ -174,8 +174,13 @@ export default function Counseling({ log, onLog, onReset, onBack }) {
           <button type="button" className={s.ghost} onClick={onBack}>
             이전
           </button>
-          <button type="button" className={s.cta} disabled={!done}>
-            시그널 정리하기
+          <button
+            type="button"
+            className={s.cta}
+            onClick={onNext}
+            disabled={!done}
+          >
+            AI 리포트 검토하기
             <IconArrowRight size={18} />
           </button>
         </div>

@@ -1,0 +1,461 @@
+.board {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--r-2xl);
+  background: var(--white);
+  box-shadow: var(--sh-card);
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------- 좌: 계획 보드 */
+
+.planPane {
+  min-width: 0;
+  padding: 26px 24px 24px;
+  background: linear-gradient(168deg, #f2f7fd 0%, #e6eef9 100%);
+}
+
+/* 오른쪽 카드 목록이 뷰포트보다 길어져도 계획표는 화면에 남는다. */
+.planInner {
+  position: sticky;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.planHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.stepBadge {
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(120deg, #22c9a8, #2f6fd6);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 18px rgba(34, 150, 190, 0.28);
+}
+
+.planTitle {
+  font-size: clamp(20px, 2.1vw, 25px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--ink-900);
+}
+
+.planSub {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.slot {
+  padding: 15px 16px;
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--sh-tile);
+  border-left: 4px solid var(--paper-300);
+}
+
+.slot.mint {
+  border-left-color: var(--mint-500);
+}
+.slot.blue {
+  border-left-color: var(--blue-500);
+}
+.slot.coral {
+  border-left-color: var(--coral-500);
+}
+
+.slotHead {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.slotNo {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--paper-100);
+  color: var(--ink-700);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.slotWho {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.slotWho b {
+  font-size: 13.5px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.slotWho small {
+  font-size: 11px;
+  color: var(--ink-400);
+}
+
+.slotCount {
+  margin-left: auto;
+  min-width: 24px;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  background: var(--paper-100);
+  color: var(--ink-500);
+  font-size: 11.5px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.slotList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 11px;
+}
+
+.slotItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  background: var(--paper-50);
+  box-shadow: inset 0 0 0 1px var(--paper-200);
+}
+
+.slotItemIcon {
+  display: inline-flex;
+  color: var(--mint-600);
+}
+
+.slotItemName {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-700);
+  word-break: keep-all;
+}
+
+.slotItemFit {
+  display: inline-flex;
+  margin-left: auto;
+  color: var(--mint-600);
+}
+
+.slotEmpty {
+  margin-top: 10px;
+  padding: 11px;
+  border-radius: var(--r-sm);
+  border: 1.5px dashed var(--paper-300);
+  color: var(--ink-400);
+  font-size: 11.5px;
+  text-align: center;
+}
+
+.planNote {
+  padding-top: 4px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ink-400);
+  word-break: keep-all;
+}
+
+/* ------------------------------------------------------- 우: 도움 카드 */
+
+.cardPane {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  min-width: 0;
+  padding: 26px 26px 24px;
+  background: var(--white);
+}
+
+.cardTitle {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.cardTitle em {
+  font-style: normal;
+  color: var(--mint-600);
+}
+
+.cardSub {
+  margin-top: 5px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 13px 14px;
+  border-radius: var(--r-md);
+  background: var(--paper-50);
+  box-shadow: inset 0 0 0 1.4px var(--paper-200);
+  transition: box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.cardOn {
+  background: var(--white);
+  box-shadow: var(--sh-tile), inset 0 0 0 1.4px rgba(53, 224, 189, 0.4);
+}
+
+.cardIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: linear-gradient(140deg, rgba(53, 224, 189, 0.18), rgba(99, 164, 255, 0.18));
+  color: var(--mint-600);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+
+.cardName {
+  font-size: 13.5px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.cardDesc {
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.pick {
+  padding: 7px 12px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1.3px var(--paper-300);
+  color: var(--ink-500);
+  font-size: 11.5px;
+  font-weight: 800;
+  transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.pick:hover {
+  background: var(--paper-100);
+}
+
+.pick.mint.pickOn {
+  background: var(--mint-500);
+  box-shadow: inset 0 0 0 1.3px var(--mint-500);
+  color: #04302a;
+}
+.pick.blue.pickOn {
+  background: var(--blue-500);
+  box-shadow: inset 0 0 0 1.3px var(--blue-500);
+  color: #fff;
+}
+.pick.coral.pickOn {
+  background: var(--coral-500);
+  box-shadow: inset 0 0 0 1.3px var(--coral-500);
+  color: #fff;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 9px;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  font-size: 11px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.tip svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+.tipGood {
+  background: rgba(34, 201, 168, 0.12);
+  color: #0d7a63;
+}
+
+.tipElse {
+  background: rgba(182, 225, 47, 0.16);
+  color: #5f7d0c;
+}
+
+.doneCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 16px 17px;
+  border-radius: var(--r-lg);
+  background: linear-gradient(140deg, rgba(53, 224, 189, 0.14), rgba(99, 164, 255, 0.14));
+  box-shadow: inset 0 0 0 1.4px rgba(53, 224, 189, 0.3);
+}
+
+.doneCard h4 {
+  font-size: 13.5px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.doneCard p {
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  padding: 8px 14px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  color: var(--ink-700);
+  font-size: 11.5px;
+  font-weight: 800;
+  box-shadow: var(--sh-tile);
+}
+
+/* 액션 */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.ghost {
+  flex: none;
+  padding: 15px 22px;
+  border-radius: var(--r-pill);
+  background: var(--paper-100);
+  color: var(--ink-700);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.16s ease;
+}
+
+.ghost:hover {
+  background: var(--paper-200);
+}
+
+.cta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 20px;
+  border-radius: var(--r-pill);
+  background: var(--grad-cta);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 900;
+  box-shadow: var(--sh-cta);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.cta:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.cta:disabled {
+  background: var(--paper-200);
+  color: var(--ink-400);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ------------------------------------------------------- 반응형 */
+
+@media (max-width: 1080px) {
+  .board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* 세로 스택에서는 계획표가 카드 위에 오므로 sticky 를 끈다. */
+  .planInner {
+    position: static;
+  }
+  .cards {
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 620px) {
+  .board {
+    border-radius: var(--r-xl);
+  }
+  .planPane,
+  .cardPane {
+    padding: 20px 16px 22px;
+  }
+  .pick {
+    flex: 1;
+    text-align: center;
+  }
+  .actions {
+    flex-direction: column-reverse;
+  }
+  .ghost {
+    width: 100%;
+  }
+}

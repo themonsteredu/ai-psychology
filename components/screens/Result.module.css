@@ -1,0 +1,387 @@
+.board {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--r-2xl);
+  background: var(--white);
+  box-shadow: var(--sh-card);
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------- 좌: 완료 배너 */
+
+.heroPane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+  min-width: 0;
+  padding: 28px 26px 26px;
+  background: linear-gradient(168deg, #fff8e6 0%, #eaf6f2 46%, #e6eef9 100%);
+  overflow: hidden;
+}
+
+/* 색종이 조각 — 그라디언트 점으로만 표현 */
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(6px 10px at 12% 18%, rgba(255, 122, 144, 0.55), transparent 60%),
+    radial-gradient(5px 9px at 78% 12%, rgba(99, 164, 255, 0.55), transparent 60%),
+    radial-gradient(7px 11px at 88% 38%, rgba(205, 245, 81, 0.6), transparent 60%),
+    radial-gradient(5px 9px at 24% 46%, rgba(53, 224, 189, 0.55), transparent 60%),
+    radial-gradient(6px 10px at 62% 62%, rgba(255, 196, 90, 0.55), transparent 60%),
+    radial-gradient(5px 9px at 8% 72%, rgba(99, 164, 255, 0.45), transparent 60%);
+}
+
+.heroPane > *:not(.confetti) {
+  position: relative;
+  z-index: 1;
+}
+
+.stepBadge {
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(120deg, #22c9a8, #2f6fd6);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 18px rgba(34, 150, 190, 0.28);
+}
+
+.trophy {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 24px;
+  background: var(--white);
+  color: #d19b12;
+  box-shadow: var(--sh-soft);
+  overflow: hidden;
+}
+
+.trophy :global(img) {
+  object-fit: contain;
+}
+
+.heroTitle {
+  font-size: clamp(23px, 2.6vw, 31px);
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: -0.035em;
+  color: var(--ink-900);
+  word-break: keep-all;
+}
+
+.heroTitle em {
+  font-style: normal;
+  background: linear-gradient(100deg, #12a98c, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.heroDesc {
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.hero {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 2 / 3;
+  margin: 2px auto 0;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.heroImg {
+  object-fit: contain;
+  object-position: bottom center;
+}
+
+.restart {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding: 12px 18px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  color: var(--ink-700);
+  font-size: 12.5px;
+  font-weight: 800;
+  box-shadow: var(--sh-tile);
+  transition: transform 0.16s ease;
+}
+
+.restart:hover {
+  transform: translateY(-2px);
+}
+
+/* ------------------------------------------------------- 우: 역량 + 진로 */
+
+.dataPane {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 26px 26px 24px;
+  background: var(--white);
+  overflow-y: auto;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.blockHead h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--ink-900);
+}
+
+.blockHead h3 svg {
+  color: var(--mint-600);
+}
+
+.blockHead p {
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: var(--ink-500);
+}
+
+/* 역량 게이지 */
+
+.gauges {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px 13px;
+  border-radius: var(--r-lg);
+  background: var(--paper-50);
+  box-shadow: inset 0 0 0 1.2px var(--paper-200);
+  text-align: center;
+}
+
+.dial {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+}
+
+.dial svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dialVal {
+  position: absolute;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.gaugeLabel {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--ink-900);
+  word-break: keep-all;
+}
+
+.gaugeDesc {
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--ink-400);
+  word-break: keep-all;
+}
+
+/* 진로 카드 */
+
+.careers {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.career {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 12px 14px;
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--sh-tile), inset 0 0 0 1.2px var(--paper-200);
+}
+
+.careerThumb {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.careerName {
+  margin-top: 2px;
+  font-size: 12.5px;
+  font-weight: 900;
+  color: var(--ink-900);
+  word-break: keep-all;
+}
+
+.careerDesc {
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.careerSkill {
+  margin-top: auto;
+  padding: 5px 9px;
+  border-radius: var(--r-pill);
+  font-size: 10px;
+  font-weight: 800;
+  align-self: flex-start;
+}
+
+.careerSkill.mint {
+  background: rgba(34, 201, 168, 0.14);
+  color: #0d7a63;
+}
+.careerSkill.blue {
+  background: rgba(59, 130, 246, 0.14);
+  color: var(--blue-600);
+}
+.careerSkill.lime {
+  background: rgba(182, 225, 47, 0.2);
+  color: #5f7d0c;
+}
+.careerSkill.coral {
+  background: rgba(244, 63, 94, 0.13);
+  color: #c32444;
+}
+
+.disclaimer {
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--paper-50);
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--ink-400);
+  word-break: keep-all;
+}
+
+/* 액션 */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.ghost {
+  flex: none;
+  padding: 15px 22px;
+  border-radius: var(--r-pill);
+  background: var(--paper-100);
+  color: var(--ink-700);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.16s ease;
+}
+
+.ghost:hover {
+  background: var(--paper-200);
+}
+
+.cta {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 20px;
+  border-radius: var(--r-pill);
+  background: var(--grad-cta);
+  color: #fff;
+  font-size: 14.5px;
+  font-weight: 900;
+  box-shadow: var(--sh-cta);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+/* ------------------------------------------------------- 반응형 */
+
+@media (max-width: 1080px) {
+  .board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dataPane {
+    overflow-y: visible;
+  }
+  .hero {
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 860px) {
+  .gauges {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .careers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .board {
+    border-radius: var(--r-xl);
+  }
+  .heroPane,
+  .dataPane {
+    padding: 20px 16px 22px;
+  }
+  .gauges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .gaugeDesc {
+    display: none;
+  }
+  .actions {
+    flex-direction: column-reverse;
+  }
+  .ghost {
+    width: 100%;
+  }
+}

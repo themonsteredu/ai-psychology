@@ -233,3 +233,39 @@ export function IconBulb(props) {
     </Svg>
   );
 }
+
+export function IconAlert(props) {
+  return (
+    <Svg {...props}>
+      <circle cx="12" cy="12" r="8.4" />
+      <path d="M12 7.8v5M12 16.2h.01" />
+    </Svg>
+  );
+}
+
+export function IconRefresh(props) {
+  return (
+    <Svg {...props}>
+      <path d="M20 11.4a8 8 0 1 0-.6 4.4" />
+      <path d="M20.2 4.8v6.6h-6.6" />
+    </Svg>
+  );
+}
+
+export function IconTrophy(props) {
+  return (
+    <Svg {...props}>
+      <path d="M7.4 4h9.2v5.2a4.6 4.6 0 0 1-9.2 0Z" />
+      <path d="M7.4 5.6H4.8v1.8a3.4 3.4 0 0 0 3 3.4M16.6 5.6h2.6v1.8a3.4 3.4 0 0 1-3 3.4" />
+      <path d="M12 13.8V17M8.6 20.2h6.8l-.8-3.2H9.4Z" />
+    </Svg>
+  );
+}
+
+export function IconX(props) {
+  return (
+    <Svg {...props}>
+      <path d="M6.6 6.6l10.8 10.8M17.4 6.6 6.6 17.4" />
+    </Svg>
+  );
+}

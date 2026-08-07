@@ -50,23 +50,33 @@ AppShell
 
 ## 현재 구현 범위
 
-### ✅ 완료
+6단계 전부 상호작용까지 구현되어 있습니다.
 
 | 단계 | 화면 | 컴포넌트 | 내용 |
 | --- | --- | --- | --- |
 | 01 | **CASE 안내** | `screens/CaseIntro.jsx` | 좌: 학교 복도 장면(민서 + 친구 3명) · CASE 01 배지 · 시그널 탐지율<br>우: 미션 헤드라인, 4개 미션 아이콘, 활동 미리보기 3카드, CTA "미션 시작하기" |
 | 02 | **단서 탐색** | `screens/ClueHunt.jsx` | 복도 장면 위 클릭형 핫스팟 5개, 단서 상세(관찰/인사이트), 수집 목록, 힌트, 탐지율 게이지 |
 | 03 | **상담 대화** | `screens/Counseling.jsx` | 메신저형 UI, 3턴 선택지 대화, 반응 품질 피드백(좋은/무난한/아쉬운), 공감 점수 |
+| 04 | **AI 리포트 검토** | `screens/AiReport.jsx` | AI가 쓴 8문장을 **사실 / 추론 / 더 확인**으로 분류. 문장마다 왜 그런지 피드백, 검토 진행률 |
+| 05 | **상담 전략** | `screens/Strategy.jsx` | 도움 카드 6장을 **오늘 바로 / 이번 주 안에 / 어른과 함께** 슬롯에 배치해 상담 계획표 완성 |
+| 06 | **결과 확인** | `screens/Result.jsx` | 5개 역량 원형 게이지 + 관련 진로 카드 4장. 점수는 전부 실제 플레이 기록에서 계산 |
 | — | **탐색 노트** | `screens/NoteDrawer.jsx` | 모은 단서 + 상담 기록을 모아 보는 우측 드로어 |
 | — | **복도 일러스트** | `scene/HallwayScene.jsx` | 1점 투시 복도, 창가 햇빛, 배경 친구 3명, 전경 민서 — 전부 인라인 SVG |
 
-### 🚧 준비 화면 (구조·학습목표만 노출)
-
-`screens/ComingSoon.jsx`가 04 AI 리포트 / 05 상담 전략 / 06 결과 확인의
-학습 목표를 미리 보여줍니다. 상호작용은 다음 단계에서 구현합니다.
-
 > 참고: 상단 단계 네비게이션의 `03 시그널 분석`에 상담 대화 화면이 들어갑니다.
 > (대화를 통해 시그널을 수집 → 정리하는 흐름)
+
+### 역량 점수 계산 (`app/page.jsx`)
+
+06 결과 화면의 게이지는 임의의 값이 아니라 플레이 기록에서 나옵니다.
+
+| 역량 | 계산 |
+| --- | --- |
+| 공감력 | 대화 선택지 점수 합 ÷ 만점(60) |
+| 관찰력 | 찾은 단서 수 ÷ 전체 단서 수 |
+| 질문력 | 선택지 품질 평균 (좋은 100 / 무난 65 / 아쉬운 30) |
+| 판단력 | 추천 시점과 일치한 도움 카드 수 ÷ 6 |
+| AI 리터러시 | 정확히 분류한 리포트 문장 수 ÷ 8 |
 
 ## 반응형
 
@@ -89,11 +99,23 @@ AppShell
 app/            layout.jsx · page.jsx(상태 오케스트레이션) · globals.css(토큰)
 components/
   shell/        AppShell · TopBar · Sidebar · AiHelper · StepNav
-  screens/      CaseIntro · ClueHunt · Counseling · NoteDrawer · ComingSoon
+  screens/      CaseIntro · ClueHunt · Counseling · AiReport · Strategy · Result · NoteDrawer
   scene/        HallwayScene (복도 일러스트 SVG)
-  ui/           Icons (라인 아이콘 세트)
-lib/            caseData.js — 사례 텍스트·단서·대화 데이터
+  ui/           Icons (라인 아이콘 세트) · AssetImage (이미지 에셋 + 폴백)
+lib/            caseData.js — 사례 텍스트·단서·대화·리포트·전략·진로 데이터
+public/assets/  일러스트 에셋 (README.md = 파일명 규약, PROMPTS.md = 생성 프롬프트)
 design-reference/  최초 시안 이미지 (참조용, 앱에서 사용하지 않음)
 ```
+
+## 이미지 에셋
+
+인물·배경·진로 카드 일러스트는 `public/assets/` 아래 PNG로 들어갑니다.
+
+- **필요한 파일 목록** → [`public/assets/README.md`](public/assets/README.md)
+- **생성용 프롬프트** → [`public/assets/PROMPTS.md`](public/assets/PROMPTS.md)
+
+아직 올라오지 않은 파일은 `components/ui/AssetImage.jsx`가 그라디언트
+플레이스홀더로 대체하므로 깨진 이미지가 뜨지 않습니다. 파일을 규약대로
+올리면 자동으로 이미지가 표시됩니다.
 
 이 단계에서는 로그인, 데이터베이스, 실제 AI API 호출을 넣지 않았습니다.
