@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import AppShell from "@/components/shell/AppShell";
-import CaseSelect from "@/components/screens/CaseSelect";
+import Title from "@/components/screens/Title";
 import CaseIntro from "@/components/screens/CaseIntro";
 import ClueHunt from "@/components/screens/ClueHunt";
 import Counseling from "@/components/screens/Counseling";
@@ -110,14 +110,17 @@ export default function Home() {
     Object.values(twistMarks).filter(Boolean).length * 10 +
     Object.values(plan).filter(Boolean).length * 10;
 
+  /** 앞 사례를 끝내야 다음이 열린다 — 목록 대신 순서대로 하나씩. */
   const openCase = (id) => {
-    setCaseId(id);
+    const target = id ?? CASES.find((c) => !done[c.id])?.id ?? CASES[0].id;
+    setCaseId(target);
     setStep("intro");
     setProgress(emptyProgress());
   };
 
-  const backToList = () => {
-    if (caseId) setDone((prev) => ({ ...prev, [caseId]: scores }));
+  const backToTitle = () => {
+    /* 결과 화면까지 간 사례만 완료로 친다 — 중간에 나가면 다음 사례가 열리지 않는다. */
+    if (caseId && step === "result") setDone((prev) => ({ ...prev, [caseId]: scores }));
     setCaseId(null);
     setNoteOpen(false);
   };
@@ -139,7 +142,7 @@ export default function Home() {
       onStepChange={setStep}
       sidebarActive={sidebarActive}
       onSidebarSelect={(id) => {
-        if (id === "case" || !caseId) backToList();
+        if (id === "case" || !caseId) backToTitle();
         else setStep(SIDEBAR_TO_STEP[id] ?? "intro");
       }}
       caseBadge={`${Object.keys(done).length}/${CASES.length}`}
@@ -147,7 +150,7 @@ export default function Home() {
       points={points}
       onOpenNote={() => setNoteOpen(true)}
     >
-      {!caseData && <CaseSelect done={done} onPick={openCase} />}
+      {!caseData && <Title done={done} onStart={openCase} />}
 
       {caseData && step === "intro" && (
         <CaseIntro
@@ -231,7 +234,7 @@ export default function Home() {
           scores={scores}
           isLast={isLastCase}
           onNext={nextCase}
-          onRestart={backToList}
+          onRestart={backToTitle}
           onBack={() => setStep("strategy")}
         />
       )}

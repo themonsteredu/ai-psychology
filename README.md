@@ -12,7 +12,8 @@ AI 시대에 사람의 마음을 이해하는 직업을 체험하는 **중학생
 
 - **Next.js 16 (App Router)** + React 19 — Vercel에 그대로 배포 가능
 - **CSS Modules** + `app/globals.css`의 디자인 토큰 (별도 CSS 프레임워크 없음)
-- `next/font/google`로 Noto Sans KR 로딩
+- 본문 `next/font/google`의 Noto Sans KR, 제목 **에스코어드림(S-Core Dream)** — `@font-face` 로 CDN 로딩,
+  못 받으면 Noto Sans KR 로 자동 대체
 - 빌드 산출물은 정적 프리렌더(`○ Static`)
 
 ```bash
@@ -67,23 +68,37 @@ AppShell
 사례 데이터는 `lib/cases/` 에 파일 하나씩 들어 있고, `lib/cases/index.js`
 의 배열에 추가하기만 하면 네 번째 사례도 붙습니다.
 
+### 사례는 순서대로 하나씩 열린다
+
+시작 화면(`screens/Title.jsx`)은 제목과 버튼 하나만 보여 줍니다. 사례 카드를
+나열하지 않습니다. 버튼을 누르면 **아직 안 한 사례 중 가장 앞의 것**이 열리고,
+그 사례의 07 결과 확인까지 가야 다음 사례가 열립니다.
+
+완료 판정은 `app/page.jsx`의 `backToTitle`에 있습니다. `step === "result"` 일
+때만 `done` 에 기록하므로, 중간에 나가면 다음 사례가 열리지 않습니다.
+
 ### 각 사례의 7단계
 
 | 단계 | 화면 | 컴포넌트 | 내용 |
 | --- | --- | --- | --- |
 | 01 | **CASE 안내** | `screens/CaseIntro.jsx` | 좌: 사례 장면 · CASE 번호 배지 · 시그널 탐지율<br>우: 미션 헤드라인, 4개 미션 아이콘, 활동 미리보기 3카드, CTA "미션 시작하기" |
-| 02 | **단서 탐색** | `screens/ClueHunt.jsx` | 사례 장면 위 클릭형 핫스팟 5개, 단서 상세(관찰/인사이트), 수집 목록, 힌트, 탐지율 게이지 |
+| 02 | **단서 탐색** | `screens/ClueHunt.jsx` | 장면을 **관찰해서** 찾는 핫스팟 5개(표시 없음, 못 찾으면 손전등이 비춘다), 단서 상세(관찰/인사이트), 수집 목록, 힌트, 탐지율 게이지 |
 | 03 | **상담 대화** | `screens/Counseling.jsx` | 메신저형 UI, 3턴 선택지 대화, 반응 품질 피드백(좋은/무난한/아쉬운), 공감 점수 |
 | 04 | **AI 리포트 검토** | `screens/AiReport.jsx` | AI가 쓴 8문장을 **사실 / 추론 / 더 확인**으로 분류. 문장마다 왜 그런지 피드백, 검토 진행률 |
 | 05 | **새로운 메시지** | `screens/NewMessage.jsx` | 판단을 끝낸 뒤 도착하는 반전. 기존 문장 4개를 **그대로 / 흔들림**으로 다시 판단 |
 | 06 | **상담 전략** | `screens/Strategy.jsx` | 도움 카드 6장을 **오늘 바로 / 이번 주 안에 / 어른과 함께** 슬롯에 배치해 상담 계획표 완성 |
 | 07 | **결과 확인** | `screens/Result.jsx` | 5개 역량 원형 게이지 + 관련 진로 카드 4장. 점수는 전부 실제 플레이 기록에서 계산 |
 | — | **탐색 노트** | `screens/NoteDrawer.jsx` | 모은 단서 + 상담 기록을 모아 보는 우측 드로어 |
-| — | **CASE 목록** | `screens/CaseSelect.jsx` | 사례 3장 카드. 완료 표시와 소요 시간, 다음에 할 사례 강조 |
+| — | **시작 화면** | `screens/Title.jsx` | 제목만 있는 랜딩. 버튼 하나로 «아직 안 한 사례»가 열린다 (사례 목록을 펼치지 않음) |
 | — | **사례 장면** | `scene/CaseScene.jsx` | 배경 이미지 위에 인물 컷아웃을 % 좌표로 합성. 단서 핫스팟도 같은 % 좌표계라 패널 비율이 바뀌어도 어긋나지 않음 |
 
 > 참고: 단계 네비게이션의 `03 시그널 분석`에 상담 대화 화면이 들어갑니다.
 > (대화를 통해 시그널을 수집 → 정리하는 흐름)
+
+> 02 단서 탐색은 «표시를 눌러 보는» 활동이 아니라 «관찰해서 찾아내는» 활동입니다.
+> 찾지 못한 핫스팟은 화면에 보이지 않습니다. 30초 동안 아무것도 못 찾거나
+> 학생이 «손전등 비추기»를 누르면, 남은 단서 하나에 손전등 빛이 3.8초간
+> 떨어져 그곳을 누르도록 안내합니다. (`ClueHunt.jsx`의 `IDLE_MS` · `TORCH_MS`)
 
 > 05 새로운 메시지의 핵심은 «새 정보는 사실을 지우지 않지만 추측은 흔든다»입니다.
 > 04에서 사실/추론을 나눈 경험을 한 번 더 뒤집어 확인하게 합니다.
@@ -122,7 +137,7 @@ AppShell
 app/            layout.jsx · page.jsx(상태 오케스트레이션) · globals.css(토큰)
 components/
   shell/        AppShell · TopBar · Sidebar · AiHelper · StepNav
-  screens/      CaseSelect · CaseIntro · ClueHunt · Counseling · AiReport ·
+  screens/      Title · CaseIntro · ClueHunt · Counseling · AiReport ·
                 NewMessage · Strategy · Result · NoteDrawer
   scene/        CaseScene (배경 + 인물 컷아웃 합성)
   ui/           Icons (라인 아이콘 세트) · AssetImage (이미지 에셋 + 폴백)

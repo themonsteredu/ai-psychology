@@ -3,6 +3,29 @@
    딥 네이비 셸 + 밝은 화이트 카드 + 민트/블루/라임 포인트
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   제목용 폰트 — 에스코어드림 (S-Core Dream)
+   구글 폰트에 없어 눈누(noonnu) CDN에서 받아 씁니다.
+   font-display: swap 이라 폰트가 늦거나 실패해도 본문 폰트로 바로 읽힙니다.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "S-Core Dream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff")
+    format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "S-Core Dream";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff")
+    format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* --- 딥 네이비 계열 (셸/배경) --- */
   --navy-900: #050d1e;
@@ -57,6 +80,10 @@
   --sh-tile: 0 4px 14px rgba(14, 31, 66, 0.07);
   --sh-cta: 0 14px 30px rgba(53, 200, 190, 0.36);
   --sh-glow-mint: 0 0 0 4px rgba(53, 224, 189, 0.16);
+
+  /* --- 제목 폰트 --- */
+  --font-title: "S-Core Dream", var(--font-noto-sans-kr), "Noto Sans KR",
+    "Apple SD Gothic Neo", sans-serif;
 
   /* --- 셸 치수 --- */
   --sidebar-w: 236px;
@@ -114,6 +141,14 @@ h3,
 h4,
 p {
   margin: 0;
+}
+
+/* 제목은 전부 에스코어드림으로 */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-title);
 }
 
 :focus-visible {
