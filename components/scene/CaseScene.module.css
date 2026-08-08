@@ -26,17 +26,6 @@
   object-position: bottom center;
 }
 
-/*
- * 아래가 잘린 컷아웃용. friends-full 은 원본이 정강이에서 끊겨 있어 발이
- * 없다. 그대로 얹으면 바닥에 파묻힌 것처럼 잘린 선이 그대로 보이므로,
- * 아랫부분을 부드럽게 날려 햇빛에 번진 것처럼 보이게 한다.
- * 발까지 있는 그림으로 교체하면 이 플래그를 빼면 된다.
- */
-.faded.faded {
-  -webkit-mask-image: linear-gradient(to bottom, #000 84%, transparent 99%);
-  mask-image: linear-gradient(to bottom, #000 84%, transparent 99%);
-}
-
 /* 발이 닿는 자리에 깔리는 타원 그림자. drop-shadow 만으로는 인물이
    공중에 떠 보여서, 바닥과 만나는 지점을 따로 그려 준다. */
 .ground {
