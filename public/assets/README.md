@@ -20,7 +20,7 @@
 
 | | |
 | --- | --- |
-| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` · `ui/trophy` · `avatar/seohyun` · `avatar/friend-boy` · `char/seohyun-full` · `char/junho-full` |
+| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` · `ui/trophy` · `avatar/seohyun` · `avatar/friend-boy` · `char/seohyun-full` · `char/junho-full` · `ui/title-hero` |
 | ⬜ 필요 | 없음 — 필요한 에셋이 전부 들어왔습니다 |
 
 > 세 사례 모두 배경·인물·아바타가 채워졌습니다. 새 사례를 추가할 때만
@@ -82,6 +82,7 @@
 | --- | --- | --- |
 | `trophy` | 트로피 (결과 확인 헤드라인) | 필수 |
 | `badge-star` | 별 배지 (CASE 진행도) | 필수 |
+| `title-hero` | 시작 화면 배경 (가로형 1672×941) | 필수 |
 
 ---
 

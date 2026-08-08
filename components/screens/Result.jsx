@@ -69,7 +69,7 @@ export default function Result({ caseData, scores, isLast, onNext, onRestart, on
 
         <button type="button" className={s.restart} onClick={onRestart}>
           <IconRefresh size={16} />
-          CASE 목록으로 돌아가기
+          처음 화면으로
         </button>
       </div>
 
@@ -137,7 +137,7 @@ export default function Result({ caseData, scores, isLast, onNext, onRestart, on
             className={s.cta}
             onClick={isLast ? onRestart : onNext}
           >
-            {isLast ? "CASE 목록으로" : `다음 CASE 시작하기`}
+            {isLast ? "처음 화면으로" : "다음 CASE 시작하기"}
             <IconArrowRight size={18} />
           </button>
         </div>
