@@ -47,6 +47,17 @@
   text-align: center;
 }
 
+/*
+ * 시작 화면은 타이틀 카드다. 제목만 에스코어드림이고 그 아래 버튼·칩이
+ * 본문 폰트면 한 덩어리로 안 읽힌다. 굵은 글자는 전부 제목 폰트로 맞춘다.
+ * (본문 문장인 tagline·note 는 가독성 때문에 본문 폰트 그대로 둔다.)
+ */
+.eyebrow,
+.cta,
+.meta {
+  font-family: var(--font-title);
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
