@@ -1,7 +1,7 @@
 "use client";
 
 import { IconCheck, IconNote } from "@/components/ui/Icons";
-import { QUALITY_META } from "@/lib/shared";
+import { QUALITY_META, getSource } from "@/lib/shared";
 import s from "./NoteDrawer.module.css";
 
 /** 탐색 노트 — 지금까지 모은 단서와 상담 기록을 모아 보여주는 패널. */
@@ -41,6 +41,8 @@ export default function NoteDrawer({ caseData, open, onClose, found, talkLog }) 
                 {CLUES.filter((c) => found.includes(c.id)).map((c) => (
                   <li key={c.id} className={s.clue}>
                     <span className={`${s.kind} ${s[c.tone]}`}>{c.kind}</span>
+                    {/* 출처를 같이 남긴다 — 04에서 사실/추론을 가를 때 근거가 된다. */}
+                    <span className={s.src}>{getSource(c.source).label}에서</span>
                     <b>{c.label}</b>
                     <p>{c.text}</p>
                   </li>
