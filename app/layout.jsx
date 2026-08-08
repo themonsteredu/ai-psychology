@@ -23,6 +23,19 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ko" className={notoSansKr.variable}>
+      <head>
+        {/*
+          제목 폰트는 첫 화면의 큰 글자에 바로 쓰이므로 미리 받아 둔다.
+          9Black 만 미리 받는다 — 700(6Bold)은 화면 안쪽에서야 나온다.
+        */}
+        <link
+          rel="preload"
+          href="/fonts/s-core-dream-9black.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

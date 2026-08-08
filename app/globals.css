@@ -5,13 +5,19 @@
 
 /* --------------------------------------------------------------------------
    제목용 폰트 — 에스코어드림 (S-Core Dream)
-   구글 폰트에 없어 눈누(noonnu) CDN에서 받아 씁니다.
-   font-display: swap 이라 폰트가 늦거나 실패해도 본문 폰트로 바로 읽힙니다.
+
+   구글 폰트에 없는 폰트라 파일을 리포에 넣고 직접 서빙합니다.
+   CDN을 거치면 학교 방화벽이 막았을 때 제목만 통째로 다른 폰트가 되는데,
+   같은 서버에서 주면 앱이 열리는 곳에서는 폰트도 항상 따라옵니다.
+
+   원본은 woff 346KB짜리 두 벌입니다. 한글 음절 11,172자 + ASCII + 호환 자모로
+   서브셋한 뒤 woff2로 바꿔 벌당 130KB로 줄였습니다. 빠진 건 한자와 희귀 기호뿐
+   이라 이 앱이 쓰는 글자는 전부 들어 있습니다.
+   (S-Core Dream, SI 애널리틱스 배포, 무료 상업용 이용 가능)
    -------------------------------------------------------------------------- */
 @font-face {
   font-family: "S-Core Dream";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff")
-    format("woff");
+  src: url("/fonts/s-core-dream-6bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -19,8 +25,7 @@
 
 @font-face {
   font-family: "S-Core Dream";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-9Black.woff")
-    format("woff");
+  src: url("/fonts/s-core-dream-9black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
