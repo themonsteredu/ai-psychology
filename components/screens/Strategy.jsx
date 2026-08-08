@@ -13,7 +13,7 @@ import {
   IconSearch,
   IconSparkle,
 } from "@/components/ui/Icons";
-import { HELP_CARDS, PLAN_SLOTS } from "@/lib/caseData";
+import { PLAN_SLOTS } from "@/lib/shared";
 import s from "./Strategy.module.css";
 
 const ICONS = {
@@ -29,7 +29,8 @@ const ICONS = {
  * 06 상담 전략 — 도움 카드를 세 개의 시점 슬롯에 배치해 상담 계획을 만든다.
  * plan: { [cardId]: slotId } — 상위(page)에서 보관해 결과 화면 점수로 이어진다.
  */
-export default function Strategy({ plan, onPlace, onReset, onNext, onBack }) {
+export default function Strategy({ caseData, plan, onPlace, onReset, onNext, onBack }) {
+  const HELP_CARDS = caseData.helpCards;
   const placed = HELP_CARDS.filter((c) => plan[c.id]);
 
   const { filledSlots, matched } = useMemo(
@@ -53,7 +54,7 @@ export default function Strategy({ plan, onPlace, onReset, onNext, onBack }) {
         <div className={s.planInner}>
           <header className={s.planHead}>
             <span className={s.stepBadge}>STEP 06</span>
-            <h2 className={s.planTitle}>민서를 위한 상담 계획</h2>
+            <h2 className={s.planTitle}>{caseData.planTitle}</h2>
             <p className={s.planSub}>
               오른쪽 도움 카드를 언제 할 일인지 골라 계획표에 채워 보세요.
             </p>

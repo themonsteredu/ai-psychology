@@ -10,7 +10,7 @@ import {
   IconRefresh,
   IconSparkle,
 } from "@/components/ui/Icons";
-import { AI_REPORT, REPORT_TAGS } from "@/lib/caseData";
+import { REPORT_TAGS } from "@/lib/shared";
 import s from "./AiReport.module.css";
 
 const TAG_BY_ID = Object.fromEntries(REPORT_TAGS.map((t) => [t.id, t]));
@@ -19,7 +19,8 @@ const TAG_BY_ID = Object.fromEntries(REPORT_TAGS.map((t) => [t.id, t]));
  * 04 AI 리포트 검토 — AI가 쓴 문장을 사실 / 추론 / 더 확인으로 분류한다.
  * marks: { [lineId]: tagId } — 상위(page)에서 보관해 결과 화면 점수로 이어진다.
  */
-export default function AiReport({ marks, onMark, onReset, onNext, onBack }) {
+export default function AiReport({ caseData, marks, onMark, onReset, onNext, onBack }) {
+  const AI_REPORT = caseData.report;
   const [active, setActive] = useState(AI_REPORT.lines[0].id);
 
   const activeLine = AI_REPORT.lines.find((l) => l.id === active) ?? null;

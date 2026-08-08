@@ -10,13 +10,7 @@ import {
   IconPaperclip,
   IconRefresh,
 } from "@/components/ui/Icons";
-import {
-  TWIST_CHECKS,
-  TWIST_INTRO,
-  TWIST_LESSON,
-  TWIST_MESSAGES,
-  TWIST_VERDICTS,
-} from "@/lib/caseData";
+import { TWIST_VERDICTS } from "@/lib/shared";
 import s from "./NewMessage.module.css";
 
 const VERDICT_BY_ID = Object.fromEntries(TWIST_VERDICTS.map((v) => [v.id, v]));
@@ -25,8 +19,11 @@ const VERDICT_BY_ID = Object.fromEntries(TWIST_VERDICTS.map((v) => [v.id, v]));
  * 05 새로운 메시지 — 판단을 끝냈다고 생각한 뒤 도착하는 반전.
  * marks: { [checkId]: verdictId } — 상위(page)에서 보관해 결과 화면 점수로 이어진다.
  */
-export default function NewMessage({ marks, onMark, onReset, onNext, onBack }) {
-  const [openFile, setOpenFile] = useState(false);
+export default function NewMessage({ caseData, marks, onMark, onReset, onNext, onBack }) {
+  const twist = caseData.twist;
+  const TWIST_CHECKS = twist.checks;
+  const TWIST_MESSAGES = twist.messages;
+  const [openFile, setOpenFile] = useState(null);
 
   const { done, correct } = useMemo(() => {
     const marked = TWIST_CHECKS.filter((c) => marks[c.id]);
@@ -44,7 +41,7 @@ export default function NewMessage({ marks, onMark, onReset, onNext, onBack }) {
       {/* ---------------- 좌: 메시지 ---------------- */}
       <div className={s.msgPane}>
         <AssetImage
-          src="/assets/scene/classroom"
+          src={twist.scene}
           alt=""
           bare
           className={s.roomBg}
@@ -57,9 +54,9 @@ export default function NewMessage({ marks, onMark, onReset, onNext, onBack }) {
               <IconAlert size={19} />
             </span>
             <span className={s.alertText}>
-              <small>{TWIST_INTRO.eyebrow}</small>
-              <b>{TWIST_INTRO.title}</b>
-              <span>{TWIST_INTRO.sub}</span>
+              <small>{twist.eyebrow}</small>
+              <b>{twist.title}</b>
+              <span>{twist.sub}</span>
             </span>
           </div>
 
@@ -86,9 +83,9 @@ export default function NewMessage({ marks, onMark, onReset, onNext, onBack }) {
                 {m.attachment && (
                   <button
                     type="button"
-                    className={`${s.file} ${openFile ? s.fileOpen : ""}`}
-                    onClick={() => setOpenFile((v) => !v)}
-                    aria-expanded={openFile}
+                    className={`${s.file} ${openFile === m.id ? s.fileOpen : ""}`}
+                    onClick={() => setOpenFile((v) => (v === m.id ? null : m.id))}
+                    aria-expanded={openFile === m.id}
                   >
                     <span className={s.fileIcon}>
                       <IconPaperclip size={16} />
@@ -98,12 +95,12 @@ export default function NewMessage({ marks, onMark, onReset, onNext, onBack }) {
                       <small>{m.attachment.size}</small>
                     </span>
                     <span className={s.fileCta}>
-                      {openFile ? "닫기" : "열어 보기"}
+                      {openFile === m.id ? "닫기" : "열어 보기"}
                     </span>
                   </button>
                 )}
 
-                {m.attachment && openFile && (
+                {m.attachment && openFile === m.id && (
                   <p className={s.fileNote}>
                     <IconBulb size={15} />
                     {m.attachment.note}
@@ -189,7 +186,7 @@ export default function NewMessage({ marks, onMark, onReset, onNext, onBack }) {
             <h3>
               다시 보기 완료 — {correct}/{TWIST_CHECKS.length} 정확
             </h3>
-            <p>{TWIST_LESSON}</p>
+            <p>{twist.lesson}</p>
             <button type="button" className={s.retry} onClick={onReset}>
               <IconRefresh size={15} />
               다시 판단하기

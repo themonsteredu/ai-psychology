@@ -15,6 +15,7 @@ export default function AppShell({
   onStepChange,
   sidebarActive = "case",
   onSidebarSelect,
+  caseBadge,
   progress = 0,
   points,
   onOpenNote,
@@ -32,18 +33,22 @@ export default function AppShell({
           onSidebarSelect?.(id);
           setDrawer(false);
         }}
+        caseBadge={caseBadge}
         open={drawer}
         onClose={() => setDrawer(false)}
       />
 
       <main className={s.main}>{children}</main>
 
-      <StepNav
-        current={step}
-        onSelect={onStepChange}
-        onOpenNote={onOpenNote}
-        progress={progress}
-      />
+      {/* 사례를 고르기 전에는 단계 네비게이션이 가리킬 것이 없다. */}
+      {step && (
+        <StepNav
+          current={step}
+          onSelect={onStepChange}
+          onOpenNote={onOpenNote}
+          progress={progress}
+        />
+      )}
     </div>
   );
 }

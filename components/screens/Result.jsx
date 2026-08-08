@@ -9,7 +9,8 @@ import {
   IconStar,
   IconTrophy,
 } from "@/components/ui/Icons";
-import { CAREERS, COMPETENCIES } from "@/lib/caseData";
+import { CAREERS, COMPETENCIES } from "@/lib/shared";
+import { particle, withParticle } from "@/lib/korean";
 import s from "./Result.module.css";
 
 const TONE_COLOR = {
@@ -19,15 +20,8 @@ const TONE_COLOR = {
   lime: "#9dc51f",
 };
 
-/** 받침 유무에 따라 주격 조사 이/가 를 고른다. ("관찰력이" / "AI 리터러시가") */
-function subjectParticle(word) {
-  const code = word.charCodeAt(word.length - 1);
-  const isHangul = code >= 0xac00 && code <= 0xd7a3;
-  return isHangul && (code - 0xac00) % 28 !== 0 ? "이" : "가";
-}
-
 /** 07 결과 확인 — 체험에서 쓴 직무 역량과 관련 진로를 보여준다. */
-export default function Result({ scores, onRestart, onBack }) {
+export default function Result({ caseData, scores, isLast, onNext, onRestart, onBack }) {
   const top = [...COMPETENCIES].sort(
     (a, b) => (scores[b.id] ?? 0) - (scores[a.id] ?? 0)
   )[0];
@@ -38,7 +32,7 @@ export default function Result({ scores, onRestart, onBack }) {
       <div className={s.heroPane}>
         <span className={s.confetti} aria-hidden="true" />
 
-        <span className={s.stepBadge}>STEP 07 · 활동 완료</span>
+        <span className={s.stepBadge}>{`CASE ${caseData.no} 완료`}</span>
 
         <span className={s.trophy}>
           <AssetImage
@@ -53,29 +47,29 @@ export default function Result({ scores, onRestart, onBack }) {
           탐정 활동 완료!
           <br />
           너의 <em>{top.label}</em>
-          {subjectParticle(top.label)}
+          {particle(top.label, "이")}
           <br />
           세상을 바꿀 거야
         </h2>
 
         <p className={s.heroDesc}>
-          민서의 마음 시그널을 끝까지 따라간 상담사님, 수고했어요. 오늘 쓴 힘은
-          아래 다섯 가지예요.
+          {withParticle(caseData.subject.name, "이")} 마음 시그널을 끝까지 따라간
+          상담사님, 수고했어요. 오늘 쓴 힘은 아래 다섯 가지예요.
         </p>
 
-        <span className={s.hero}>
+        <span className={`${s.hero} ${caseData.hero ? "" : s.heroRound}`}>
           <AssetImage
-            src="/assets/char/minseo-happy"
-            alt="밝게 웃는 민서"
+            src={caseData.hero ?? caseData.subject.avatar}
+            alt={`${caseData.subject.name} 프로필`}
             tone="mint"
             fallback={<IconSparkle size={44} />}
-            className={s.heroImg}
+            className={caseData.hero ? s.heroImg : undefined}
           />
         </span>
 
         <button type="button" className={s.restart} onClick={onRestart}>
           <IconRefresh size={16} />
-          처음부터 다시 체험하기
+          CASE 목록으로 돌아가기
         </button>
       </div>
 
@@ -138,8 +132,12 @@ export default function Result({ scores, onRestart, onBack }) {
           <button type="button" className={s.ghost} onClick={onBack}>
             이전
           </button>
-          <button type="button" className={s.cta} onClick={onRestart}>
-            새로운 CASE 받기
+          <button
+            type="button"
+            className={s.cta}
+            onClick={isLast ? onRestart : onNext}
+          >
+            {isLast ? "CASE 목록으로" : `다음 CASE 시작하기`}
             <IconArrowRight size={18} />
           </button>
         </div>

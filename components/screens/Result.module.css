@@ -102,6 +102,14 @@
   overflow: hidden;
 }
 
+/* 전신 일러스트가 없는 사례는 프로필을 크게 원형으로 보여준다. */
+.heroRound {
+  max-width: 190px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  box-shadow: var(--sh-soft), 0 0 0 4px rgba(53, 224, 189, 0.35);
+}
+
 .heroImg {
   object-fit: contain;
   object-position: bottom center;

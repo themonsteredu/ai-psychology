@@ -1,6 +1,6 @@
 "use client";
 
-import HallwayScene from "@/components/scene/HallwayScene";
+import CaseScene from "@/components/scene/CaseScene";
 import {
   IconArrowRight,
   IconBrain,
@@ -10,7 +10,7 @@ import {
   IconPulse,
   IconSearch,
 } from "@/components/ui/Icons";
-import { ACTIVITY_PREVIEW, CASE_META, MISSION_STEPS } from "@/lib/caseData";
+
 import s from "./CaseIntro.module.css";
 
 const ICONS = {
@@ -22,16 +22,17 @@ const ICONS = {
   pulse: IconPulse,
 };
 
-export default function CaseIntro({ onStart, detection = 0 }) {
+export default function CaseIntro({ caseData, onStart, detection = 0 }) {
+  const { missions, activityPreview } = caseData;
   return (
-    <section className={s.board} aria-label="CASE 01 안내">
+    <section className={s.board} aria-label={`CASE ${caseData.no} 안내`}>
       {/* ==================== 좌측: 복도 장면 ==================== */}
       <div className={s.scenePane}>
-        <HallwayScene className={s.scene} />
+        <CaseScene scene={caseData.scene} className={s.scene} title={caseData.title} />
 
         <div className={s.sceneTop}>
-          <span className={s.caseBadge}>{CASE_META.code}</span>
-          <span className={s.sceneTitle}>{CASE_META.sceneTitle}</span>
+          <span className={s.caseBadge}>{`CASE ${caseData.no}`}</span>
+          <span className={s.sceneTitle}>{caseData.title}</span>
         </div>
 
         <div className={s.detect}>
@@ -49,24 +50,24 @@ export default function CaseIntro({ onStart, detection = 0 }) {
       <div className={s.missionPane}>
         <span className={s.eyebrow}>
           <span className={s.eyebrowDot} aria-hidden="true" />
-          {CASE_META.eyebrow}
+          {caseData.eyebrow}
           <IconArrowRight size={13} className={s.eyebrowArrow} />
         </span>
 
         <h2 className={s.headline}>
-          {CASE_META.headlineTop}
+          {caseData.headline.top}
           <br />
-          <em className={s.headlineAccent}>{CASE_META.headlineAccent}</em>
-          {CASE_META.headlineTail}
+          <em className={s.headlineAccent}>{caseData.headline.accent}</em>
+          {caseData.headline.tail}
         </h2>
 
-        <p className={s.summary}>{CASE_META.summary}</p>
+        <p className={s.summary}>{caseData.summary}</p>
 
         {/* --- 4개 미션 아이콘 --- */}
         <ul className={s.missions}>
-          {MISSION_STEPS.map((m) => {
+          {missions.map((m, i) => {
             const Icon = ICONS[m.icon];
-            const on = m.state === "active";
+            const on = i === 0;
             return (
               <li key={m.id} className={`${s.mission} ${on ? s.missionOn : ""}`}>
                 <span className={s.missionRing}>
@@ -82,7 +83,7 @@ export default function CaseIntro({ onStart, detection = 0 }) {
         <div className={s.preview}>
           <h3 className={s.previewTitle}>활동 미리보기</h3>
           <ul className={s.previewList}>
-            {ACTIVITY_PREVIEW.map((a) => {
+            {activityPreview.map((a) => {
               const Icon = ICONS[a.icon];
               return (
                 <li key={a.id} className={s.previewCard}>

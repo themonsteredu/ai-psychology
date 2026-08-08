@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import AssetImage from "@/components/ui/AssetImage";
 import { IconArrowRight, IconBulb, IconCheck, IconSend } from "@/components/ui/Icons";
-import { DIALOGUE, QUALITY_META } from "@/lib/caseData";
+import { QUALITY_META } from "@/lib/shared";
+import { withParticle } from "@/lib/korean";
 import s from "./Counseling.module.css";
 
 /** 03 상담 대화 — 메신저형 선택지 대화. */
-export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
+export default function Counseling({ caseData, log, onLog, onReset, onNext, onBack }) {
+  const DIALOGUE = caseData.dialogue;
   const turn = DIALOGUE[log.length] ?? null;
   const done = log.length >= DIALOGUE.length;
   const feedRef = useRef(null);
@@ -45,30 +47,28 @@ export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
     <section className={s.board} aria-label="상담 대화">
       {/* ---------------- 좌: 대화 ---------------- */}
       <div className={s.chatPane}>
-        {/* 상담실 배경 — 방과 그 안에 앉은 민서를 한 겹으로 깔고,
+        {/* 상담실 배경 — 방과 (있다면) 그 안에 앉은 내담자를 한 겹으로 깔고,
             말풍선은 그 위에 얹는다. */}
         <span className={s.room} aria-hidden="true">
-          <AssetImage
-            src="/assets/scene/counseling-room"
-            alt=""
-            bare
-            className={s.roomBg}
-          />
-          <AssetImage
-            src="/assets/char/minseo-talk"
-            alt=""
-            bare
-            className={s.roomMinseo}
-          />
+          <AssetImage src={caseData.room.bg} alt="" bare className={s.roomBg} />
+          {caseData.room.figure && (
+            <AssetImage
+              src={caseData.room.figure.src}
+              alt=""
+              bare
+              className={s.roomMinseo}
+              style={caseData.room.figure.style}
+            />
+          )}
         </span>
 
         <header className={s.chatHead}>
           <span className={s.avatar} aria-hidden="true">
-            <AssetImage src="/assets/avatar/minseo" alt="" tone="mint" />
+            <AssetImage src={caseData.subject.avatar} alt="" tone="mint" />
           </span>
           <span className={s.chatWho}>
-            <b>민서</b>
-            <small>2학년 3반 · 상담실</small>
+            <b>{caseData.subject.name}</b>
+            <small>{caseData.subject.where} · 상담실</small>
           </span>
           <span className={s.chatState}>
             <span className={s.chatDot} />
@@ -102,7 +102,7 @@ export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
           )}
 
           {typing && (
-            <div className={s.typing} aria-label="민서가 입력 중">
+            <div className={s.typing} aria-label={`${caseData.subject.name}가 입력 중`}>
               <span />
               <span />
               <span />
@@ -116,8 +116,9 @@ export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
               </span>
               <h3>1차 상담을 마쳤어요</h3>
               <p>
-                공감 점수 <b>{total}</b> / {maxTotal}점 — 민서가 마음속 이야기를
-                꺼내기 시작했어요. 다음 단계에서 시그널을 정리해 봅시다.
+                공감 점수 <b>{total}</b> / {maxTotal}점 —{" "}
+                {withParticle(caseData.subject.name, "이")} 마음속 이야기를 꺼내기
+                시작했어요. 다음 단계에서 시그널을 정리해 봅시다.
               </p>
             </div>
           )}
@@ -130,7 +131,7 @@ export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
           <span className={s.stepBadge}>STEP 03 · 상담 대화</span>
           <h2 className={s.pickTitle}>상담사의 한마디</h2>
           <p className={s.pickSub}>
-            민서의 마음이 열리는 말을 골라 보세요. 정답보다 태도가 중요해요.
+            {`${withParticle(caseData.subject.name, "이")} 마음을 여는 말을 골라 보세요. 정답보다 태도가 중요해요.`}
           </p>
         </header>
 
@@ -175,9 +176,9 @@ export default function Counseling({ log, onLog, onReset, onNext, onBack }) {
         <div className={s.tips}>
           <h4>기억할 점</h4>
           <ul>
-            <li>감정을 먼저 알아주고, 조언은 나중에.</li>
-            <li>&quot;왜&quot;보다 &quot;어떤 느낌이었어?&quot;로 물어보기.</li>
-            <li>내 추측을 사실처럼 말하지 않기.</li>
+            {caseData.dialogueTips.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
           </ul>
         </div>
 

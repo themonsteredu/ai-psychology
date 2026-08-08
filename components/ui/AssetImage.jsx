@@ -23,6 +23,7 @@ export default function AssetImage({
   fallback = null,
   bare = false,
   className = "",
+  style,
 }) {
   const [tried, setTried] = useState(0);
   const ref = useRef(null);
@@ -43,6 +44,7 @@ export default function AssetImage({
         role={fallback || !alt ? undefined : "img"}
         aria-label={fallback || !alt ? undefined : alt}
         aria-hidden={alt ? undefined : true}
+        style={style}
       >
         {fallback}
       </span>
@@ -58,6 +60,7 @@ export default function AssetImage({
       src={`${src}.${EXTS[tried]}`}
       alt={alt}
       className={`${s.img} ${className}`}
+      style={style}
       onError={() => setTried((n) => n + 1)}
     />
   );

@@ -1,0 +1,279 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+  min-width: 0;
+  padding: 30px 30px 28px;
+  border-radius: var(--r-2xl);
+  background: var(--white);
+  box-shadow: var(--sh-card);
+}
+
+/* ------------------------------------------------------- 머리말 */
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: var(--r-pill);
+  background: rgba(53, 224, 189, 0.14);
+  color: #0d7a63;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.title {
+  font-size: clamp(24px, 2.6vw, 30px);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  color: var(--ink-900);
+}
+
+.sub {
+  max-width: 62ch;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  padding: 9px 15px;
+  border-radius: var(--r-pill);
+  background: var(--paper-50);
+  box-shadow: inset 0 0 0 1px var(--paper-200);
+}
+
+.metaItem {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-700);
+}
+
+.metaItem b {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--mint-600);
+}
+
+.metaDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--paper-300);
+}
+
+/* ------------------------------------------------------- 카드 목록 */
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--r-xl);
+  background: var(--white);
+  box-shadow: var(--sh-tile), inset 0 0 0 1.3px var(--paper-200);
+  overflow: hidden;
+  text-align: left;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-card), inset 0 0 0 1.3px var(--paper-200);
+}
+
+.cardNext {
+  box-shadow: var(--sh-soft), inset 0 0 0 2px var(--mint-500);
+}
+
+.cardDone .thumb :global(img) {
+  filter: saturate(0.7) brightness(1.06);
+}
+
+.thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--paper-100);
+}
+
+.no {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  background: rgba(9, 22, 45, 0.7);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.doneBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: var(--r-pill);
+  background: var(--mint-500);
+  color: #04302a;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  padding: 16px 16px 17px;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+  word-break: keep-all;
+}
+
+.lead {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+  background: rgba(99, 164, 255, 0.13);
+  color: var(--blue-600);
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+.desc {
+  margin-top: 2px;
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: var(--ink-500);
+  word-break: keep-all;
+}
+
+/* 요약 길이가 달라도 카드 하단(인물·시간·버튼)이 나란히 오도록 밀어낸다. */
+.foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 11px;
+  border-top: 1px solid var(--paper-200);
+}
+
+.who {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--ink-700);
+}
+
+.whoAvatar {
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--paper-100);
+  box-shadow: 0 0 0 1.6px rgba(53, 224, 189, 0.45);
+}
+
+.minutes {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--ink-400);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: var(--r-pill);
+  background: var(--grad-cta);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: var(--sh-cta);
+}
+
+.cardDone .cta {
+  background: var(--paper-100);
+  color: var(--ink-700);
+  box-shadow: none;
+}
+
+/* ------------------------------------------------------- 안내 */
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: auto;
+  padding: 13px 15px;
+  border-radius: var(--r-md);
+  background: var(--paper-50);
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--ink-400);
+  word-break: keep-all;
+}
+
+.note svg {
+  flex: none;
+  margin-top: 1px;
+}
+
+/* ------------------------------------------------------- 반응형 */
+
+@media (max-width: 1080px) {
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .board {
+    padding: 22px 16px 22px;
+    border-radius: var(--r-xl);
+  }
+  .list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

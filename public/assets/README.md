@@ -21,14 +21,13 @@
 | | |
 | --- | --- |
 | ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` · `avatar/seohyun` · `avatar/friend-boy` |
-| 📦 넣어만 둠 | `scene/rooftop` |
-| ⬜ 필요 | `ui/trophy` |
+| ⬜ 필요 | `char/seohyun-full` (CASE 02) · `char/junho-full` (CASE 03) · `ui/trophy` |
 
-> `ui/trophy` 하나만 남았습니다. 07 결과 확인 헤드라인의 트로피 자리로,
-> 지금은 라인 아이콘으로 대체돼 있어 크게 티가 나지는 않습니다.
+> **`char/seohyun-full`·`char/junho-full` 이 급합니다.** CASE 02·03의
+> 단서 탐색 화면에 주인공이 비어 있어서, 지금은 배경 위에 핫스팟만
+> 떠 있는 상태입니다. 프롬프트는 PROMPTS.md 2-5 · 2-6 에 있습니다.
 >
-> 「넣어만 둠」은 파일은 있지만 아직 쓰는 화면이 없다는 뜻입니다.
-> `scene/rooftop` 은 확장 사례용입니다.
+> `ui/trophy` 는 라인 아이콘으로 대체돼 있어 크게 티가 나지 않습니다.
 
 ### 받은 원본을 손본 내용
 
@@ -45,8 +44,8 @@
 | --- | --- | --- |
 | `hallway` | CASE 01 학교 복도 — 01 CASE 안내 · 02 단서 탐색 | 필수 |
 | `counseling-room` | 상담실 — 03 상담 대화 | 필수 |
-| `classroom` | 교실 — 05 새로운 메시지 배경 | 필수 |
-| `rooftop` | 옥상 — 확장 사례용 | 선택 |
+| `classroom` | 교실 — CASE 02 배경 · CASE 01 새 메시지 배경 | 필수 |
+| `rooftop` | 옥상 — CASE 03 배경 | 필수 |
 
 ## char/ — 인물 (투명 배경, 세로형 1024×1536)
 
@@ -54,7 +53,9 @@
 | --- | --- | --- |
 | `minseo-full` | 민서 — 휴대폰 보는 전신 (복도 장면 전경) | 필수 |
 | `minseo-talk` | 민서 — 앉아서 이야기하는 반신 (03 상담실 배경) | 필수 |
-| `minseo-happy` | 민서 — 밝게 웃는 전신 (07 결과 확인 좌측) | 필수 |
+| `minseo-happy` | 민서 — 밝게 웃는 전신 (CASE 01 결과 좌측) | 필수 |
+| `seohyun-full` | 서현 — 방과 후 교실 전신 (CASE 02 장면) | 필수 |
+| `junho-full` | 준호 — 옥상 전신 (CASE 03 장면) | 필수 |
 | `friends-full` | 친구 3명 그룹 — 대화 중 전신 (복도 장면 배경) | 필수 |
 
 ## avatar/ — 원형 프로필 (정사각형 1024×1024)
@@ -63,11 +64,11 @@
 | --- | --- | --- |
 | `minseo` | 민서 프로필 (상담 대화 헤더) | 필수 |
 | `ai-helper` | AI 도우미 로봇 (좌하단 · AI 리포트 말풍선) | 필수 |
-| `seohyun` | 서현 프로필 — 05 새로운 메시지 | 필수 |
-| `friend-boy` | 준호 프로필 — 05 새로운 메시지 | 필수 |
+| `seohyun` | 서현 프로필 — CASE 02 주인공 · 새 메시지 | 필수 |
+| `friend-boy` | 준호 프로필 — CASE 03 주인공 · 새 메시지 | 필수 |
 | `user` | 플레이어(신입 상담사) 프로필 — 상단바 | 필수 |
 
-## career/ — 진로 카드 (정사각형 1024×1024, 07 결과 확인)
+## career/ — 진로 카드 (정사각형 1024×1024, 결과 확인 화면)
 
 | 파일 | 용도 | 우선순위 |
 | --- | --- | --- |
@@ -80,7 +81,7 @@
 
 | 파일 | 용도 | 우선순위 |
 | --- | --- | --- |
-| `trophy` | 트로피 (07 결과 확인 헤드라인) | 필수 |
+| `trophy` | 트로피 (결과 확인 헤드라인) | 필수 |
 | `badge-star` | 별 배지 (CASE 진행도) | 필수 |
 
 ---

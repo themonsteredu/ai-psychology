@@ -1,11 +1,12 @@
 "use client";
 
 import { IconCheck, IconNote } from "@/components/ui/Icons";
-import { CLUES, QUALITY_META } from "@/lib/caseData";
+import { QUALITY_META } from "@/lib/shared";
 import s from "./NoteDrawer.module.css";
 
 /** 탐색 노트 — 지금까지 모은 단서와 상담 기록을 모아 보여주는 패널. */
-export default function NoteDrawer({ open, onClose, found, talkLog }) {
+export default function NoteDrawer({ caseData, open, onClose, found, talkLog }) {
+  const CLUES = caseData?.clues ?? [];
   return (
     <>
       <div

@@ -2,7 +2,7 @@
 
 import AssetImage from "@/components/ui/AssetImage";
 import { IconCheck, IconNote, IconStar } from "@/components/ui/Icons";
-import { STEPS } from "@/lib/caseData";
+import { STEPS } from "@/lib/shared";
 import s from "./StepNav.module.css";
 
 export default function StepNav({ current, onSelect, onOpenNote, progress = 0 }) {

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import AppShell from "@/components/shell/AppShell";
+import CaseSelect from "@/components/screens/CaseSelect";
 import CaseIntro from "@/components/screens/CaseIntro";
 import ClueHunt from "@/components/screens/ClueHunt";
 import Counseling from "@/components/screens/Counseling";
@@ -10,17 +11,10 @@ import NewMessage from "@/components/screens/NewMessage";
 import Strategy from "@/components/screens/Strategy";
 import Result from "@/components/screens/Result";
 import NoteDrawer from "@/components/screens/NoteDrawer";
-import {
-  AI_REPORT,
-  CLUES,
-  DIALOGUE,
-  HELP_CARDS,
-  STEPS,
-  TWIST_CHECKS,
-} from "@/lib/caseData";
+import { CASES, getCase } from "@/lib/cases";
+import { STEPS } from "@/lib/shared";
 
 const SIDEBAR_TO_STEP = {
-  case: "intro",
   note: "clues",
   board: "signal",
   report: "report",
@@ -32,29 +26,49 @@ const SIDEBAR_TO_STEP = {
 /** 선택지 품질 → 질문력 환산 점수 */
 const QUESTION_SCORE = { good: 100, soso: 65, poor: 30 };
 
+/** 사례 하나를 푸는 동안 쌓이는 기록 */
+const emptyProgress = () => ({
+  found: [],
+  talkLog: [],
+  reportMarks: {},
+  twistMarks: {},
+  plan: {},
+});
+
 export default function Home() {
+  const [caseId, setCaseId] = useState(null);
   const [step, setStep] = useState("intro");
-  const [foundClues, setFoundClues] = useState([]);
-  const [talkLog, setTalkLog] = useState([]);
-  const [reportMarks, setReportMarks] = useState({});
-  const [twistMarks, setTwistMarks] = useState({});
-  const [plan, setPlan] = useState({});
+  const [progress, setProgress] = useState(emptyProgress);
+  /** 완료한 사례의 역량 점수 — { [caseId]: scores } */
+  const [done, setDone] = useState({});
   const [noteOpen, setNoteOpen] = useState(false);
 
-  const detection = Math.round((foundClues.length / CLUES.length) * 100);
+  const caseData = caseId ? getCase(caseId) : null;
+  const caseIdx = CASES.findIndex((c) => c.id === caseId);
+  const isLastCase = caseIdx === CASES.length - 1;
 
-  const progress = useMemo(() => {
+  const { found, talkLog, reportMarks, twistMarks, plan } = progress;
+  const patch = (next) => setProgress((prev) => ({ ...prev, ...next }));
+
+  const detection = caseData
+    ? Math.round((found.length / caseData.clues.length) * 100)
+    : 0;
+
+  const stepPct = useMemo(() => {
+    if (!caseData) return 0;
     const idx = STEPS.findIndex((s) => s.id === step);
     /* 단계 수가 아니라 '구간 수'로 나눠야 마지막 단계가 100% 가 된다. */
     const spans = STEPS.length - 1;
     const base = (idx / spans) * 100;
     const within = step === "clues" ? (detection / 100) * (100 / spans) : 0;
     return Math.min(100, Math.round(base + within));
-  }, [step, detection]);
+  }, [caseData, step, detection]);
 
-  /** 04~07에서 쓰는 직무 역량 점수 — 모두 실제 플레이 기록에서 계산한다. */
+  /** 직무 역량 점수 — 모두 실제 플레이 기록에서 계산한다. */
   const scores = useMemo(() => {
-    const maxEmpathy = DIALOGUE.length * 20;
+    if (!caseData) return {};
+
+    const maxEmpathy = caseData.dialogue.length * 20;
     const empathy = talkLog.reduce((a, t) => a + t.score, 0);
 
     const question = talkLog.length
@@ -62,141 +76,171 @@ export default function Home() {
         talkLog.length
       : 0;
 
-    const aiCorrect = AI_REPORT.lines.filter(
+    const aiCorrect = caseData.report.lines.filter(
       (l) => reportMarks[l.id] === l.answer
     ).length;
 
-    const planFit = HELP_CARDS.filter((c) => plan[c.id] === c.recommend).length;
-
     /* 판단력은 두 활동에서 나온다 — 계획의 시점 선택과, 새 정보로 판단을 고쳐 본 결과. */
-    const twistFit = TWIST_CHECKS.filter(
+    const planFit = caseData.helpCards.filter(
+      (c) => plan[c.id] === c.recommend
+    ).length;
+    const twistFit = caseData.twist.checks.filter(
       (c) => twistMarks[c.id] === c.answer
     ).length;
     const judgment =
-      (planFit / HELP_CARDS.length + twistFit / TWIST_CHECKS.length) / 2;
+      (planFit / caseData.helpCards.length +
+        twistFit / caseData.twist.checks.length) /
+      2;
 
     return {
       empathy: Math.round((empathy / maxEmpathy) * 100),
       observation: detection,
       question: Math.round(question),
       judgment: Math.round(judgment * 100),
-      ai: Math.round((aiCorrect / AI_REPORT.lines.length) * 100),
+      ai: Math.round((aiCorrect / caseData.report.lines.length) * 100),
     };
-  }, [talkLog, reportMarks, twistMarks, plan, detection]);
+  }, [caseData, talkLog, reportMarks, twistMarks, plan, detection]);
 
   const points =
     1260 +
-    foundClues.length * 20 +
+    Object.keys(done).length * 300 +
+    found.length * 20 +
     talkLog.reduce((a, t) => a + t.score, 0) +
     Object.keys(reportMarks).length * 10 +
     Object.values(twistMarks).filter(Boolean).length * 10 +
     Object.values(plan).filter(Boolean).length * 10;
 
-  const sidebarActive =
-    Object.entries(SIDEBAR_TO_STEP).find(([, v]) => v === step)?.[0] ?? "case";
-
-  const restart = () => {
-    setFoundClues([]);
-    setTalkLog([]);
-    setReportMarks({});
-    setTwistMarks({});
-    setPlan({});
+  const openCase = (id) => {
+    setCaseId(id);
     setStep("intro");
+    setProgress(emptyProgress());
   };
+
+  const backToList = () => {
+    if (caseId) setDone((prev) => ({ ...prev, [caseId]: scores }));
+    setCaseId(null);
+    setNoteOpen(false);
+  };
+
+  const nextCase = () => {
+    setDone((prev) => ({ ...prev, [caseId]: scores }));
+    const next = CASES[caseIdx + 1];
+    if (next) openCase(next.id);
+    else setCaseId(null);
+  };
+
+  const sidebarActive = caseId
+    ? (Object.entries(SIDEBAR_TO_STEP).find(([, v]) => v === step)?.[0] ?? "case")
+    : "case";
 
   return (
     <AppShell
-      step={step}
+      step={caseId ? step : null}
       onStepChange={setStep}
       sidebarActive={sidebarActive}
-      onSidebarSelect={(id) => setStep(SIDEBAR_TO_STEP[id] ?? "intro")}
-      progress={progress}
+      onSidebarSelect={(id) => {
+        if (id === "case" || !caseId) backToList();
+        else setStep(SIDEBAR_TO_STEP[id] ?? "intro");
+      }}
+      caseBadge={`${Object.keys(done).length}/${CASES.length}`}
+      progress={stepPct}
       points={points}
       onOpenNote={() => setNoteOpen(true)}
     >
-      {step === "intro" && (
-        <CaseIntro detection={detection} onStart={() => setStep("clues")} />
+      {!caseData && <CaseSelect done={done} onPick={openCase} />}
+
+      {caseData && step === "intro" && (
+        <CaseIntro
+          caseData={caseData}
+          detection={detection}
+          onStart={() => setStep("clues")}
+        />
       )}
 
-      {step === "clues" && (
+      {caseData && step === "clues" && (
         <ClueHunt
-          found={foundClues}
+          caseData={caseData}
+          found={found}
           onFind={(id) =>
-            setFoundClues((prev) => (prev.includes(id) ? prev : [...prev, id]))
+            patch({ found: found.includes(id) ? found : [...found, id] })
           }
           onNext={() => setStep("signal")}
           onBack={() => setStep("intro")}
         />
       )}
 
-      {step === "signal" && (
+      {caseData && step === "signal" && (
         <Counseling
+          caseData={caseData}
           log={talkLog}
-          onLog={(entry) => setTalkLog((prev) => [...prev, entry])}
-          onReset={() => setTalkLog([])}
+          onLog={(entry) => patch({ talkLog: [...talkLog, entry] })}
+          onReset={() => patch({ talkLog: [] })}
           onNext={() => setStep("report")}
           onBack={() => setStep("clues")}
         />
       )}
 
-      {step === "report" && (
+      {caseData && step === "report" && (
         <AiReport
+          caseData={caseData}
           marks={reportMarks}
           onMark={(lineId, tagId) =>
-            setReportMarks((prev) => ({ ...prev, [lineId]: tagId }))
+            patch({ reportMarks: { ...reportMarks, [lineId]: tagId } })
           }
-          onReset={() => setReportMarks({})}
+          onReset={() => patch({ reportMarks: {} })}
           onNext={() => setStep("twist")}
           onBack={() => setStep("signal")}
         />
       )}
 
-      {step === "twist" && (
+      {caseData && step === "twist" && (
         <NewMessage
+          caseData={caseData}
           marks={twistMarks}
-          onMark={(checkId, verdictId) =>
-            setTwistMarks((prev) => {
-              const next = { ...prev };
-              if (verdictId) next[checkId] = verdictId;
-              else delete next[checkId];
-              return next;
-            })
-          }
-          onReset={() => setTwistMarks({})}
+          onMark={(checkId, verdictId) => {
+            const next = { ...twistMarks };
+            if (verdictId) next[checkId] = verdictId;
+            else delete next[checkId];
+            patch({ twistMarks: next });
+          }}
+          onReset={() => patch({ twistMarks: {} })}
           onNext={() => setStep("strategy")}
           onBack={() => setStep("report")}
         />
       )}
 
-      {step === "strategy" && (
+      {caseData && step === "strategy" && (
         <Strategy
+          caseData={caseData}
           plan={plan}
-          onPlace={(cardId, slotId) =>
-            setPlan((prev) => {
-              const next = { ...prev };
-              if (slotId) next[cardId] = slotId;
-              else delete next[cardId];
-              return next;
-            })
-          }
-          onReset={() => setPlan({})}
+          onPlace={(cardId, slotId) => {
+            const next = { ...plan };
+            if (slotId) next[cardId] = slotId;
+            else delete next[cardId];
+            patch({ plan: next });
+          }}
+          onReset={() => patch({ plan: {} })}
           onNext={() => setStep("result")}
           onBack={() => setStep("twist")}
         />
       )}
 
-      {step === "result" && (
+      {caseData && step === "result" && (
         <Result
+          caseData={caseData}
           scores={scores}
-          onRestart={restart}
+          isLast={isLastCase}
+          onNext={nextCase}
+          onRestart={backToList}
           onBack={() => setStep("strategy")}
         />
       )}
 
       <NoteDrawer
+        caseData={caseData}
         open={noteOpen}
         onClose={() => setNoteOpen(false)}
-        found={foundClues}
+        found={found}
         talkLog={talkLog}
       />
     </AppShell>

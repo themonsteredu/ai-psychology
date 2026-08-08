@@ -1,18 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import HallwayScene from "@/components/scene/HallwayScene";
+import CaseScene from "@/components/scene/CaseScene";
 import {
   IconArrowRight,
   IconBulb,
   IconCheck,
   IconSearch,
 } from "@/components/ui/Icons";
-import { CLUES, CLUE_HINTS } from "@/lib/caseData";
+
+import { withParticle } from "@/lib/korean";
 import s from "./ClueHunt.module.css";
 
 /** 02 단서 탐색 — 복도 장면 위 핫스팟을 눌러 단서를 모은다. */
-export default function ClueHunt({ found, onFind, onNext, onBack }) {
+export default function ClueHunt({ caseData, found, onFind, onNext, onBack }) {
+  const CLUES = caseData.clues;
+  const CLUE_HINTS = caseData.clueHints;
   const [active, setActive] = useState(null);
   const [hint, setHint] = useState(0);
 
@@ -29,11 +32,16 @@ export default function ClueHunt({ found, onFind, onNext, onBack }) {
     <section className={s.board} aria-label="단서 탐색">
       {/* ---------------- 좌: 장면 + 핫스팟 ---------------- */}
       <div className={s.scenePane}>
-        <HallwayScene className={s.scene} spotlight={active === "distance" || active === "friends" ? "friends" : active ? "minseo" : null} />
+        <CaseScene
+          scene={caseData.scene}
+          className={s.scene}
+          title={caseData.title}
+          spotlight={active ? (caseData.spotlightOf?.[active] ?? caseData.scene.figures.at(-1)?.id) : null}
+        />
 
         <div className={s.sceneTop}>
           <span className={s.stepBadge}>STEP 02</span>
-          <span className={s.sceneTitle}>복도에서 마음 시그널을 찾아보세요</span>
+          <span className={s.sceneTitle}>{caseData.sceneTitle}</span>
         </div>
 
         {CLUES.map((c) => {
@@ -149,7 +157,7 @@ export default function ClueHunt({ found, onFind, onNext, onBack }) {
             onClick={onNext}
             disabled={!all}
           >
-            {all ? "민서와 대화하기" : `단서 ${CLUES.length - found.length}개 더 찾기`}
+            {all ? `${withParticle(caseData.subject.name, "과")} 대화하기` : `단서 ${CLUES.length - found.length}개 더 찾기`}
             <IconArrowRight size={18} />
           </button>
         </div>

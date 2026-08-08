@@ -9,7 +9,7 @@ import {
   IconReport,
   IconStrategy,
 } from "@/components/ui/Icons";
-import { SIDEBAR_ITEMS } from "@/lib/caseData";
+import { SIDEBAR_ITEMS } from "@/lib/shared";
 import AiHelper from "./AiHelper";
 import s from "./Sidebar.module.css";
 
@@ -23,7 +23,7 @@ const ICONS = {
   career: IconCareer,
 };
 
-export default function Sidebar({ active, onSelect, open, onClose }) {
+export default function Sidebar({ active, onSelect, open, onClose, caseBadge }) {
   return (
     <>
       <div
@@ -52,7 +52,11 @@ export default function Sidebar({ active, onSelect, open, onClose }) {
                       <Icon size={20} />
                     </span>
                     <span className={s.itemLabel}>{item.label}</span>
-                    {item.badge && <span className={s.itemBadge}>{item.badge}</span>}
+                    {(item.id === "case" ? caseBadge : item.badge) && (
+                      <span className={s.itemBadge}>
+                        {item.id === "case" ? caseBadge : item.badge}
+                      </span>
+                    )}
                   </button>
                 </li>
               );
