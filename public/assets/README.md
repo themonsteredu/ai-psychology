@@ -20,12 +20,11 @@
 
 | | |
 | --- | --- |
-| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` · `ui/trophy` · `avatar/seohyun` · `avatar/friend-boy` |
-| ⬜ 필요 | `char/seohyun-full` (CASE 02) · `char/junho-full` (CASE 03) |
+| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` · `ui/trophy` · `avatar/seohyun` · `avatar/friend-boy` · `char/seohyun-full` · `char/junho-full` |
+| ⬜ 필요 | 없음 — 필요한 에셋이 전부 들어왔습니다 |
 
-> **남은 건 이 두 장뿐입니다.** CASE 02·03의 단서 탐색 화면에 주인공이
-> 비어 있어서, 지금은 배경 위에 핫스팟만 떠 있는 상태입니다.
-> 프롬프트는 PROMPTS.md 2-5 · 2-6 에 있습니다.
+> 세 사례 모두 배경·인물·아바타가 채워졌습니다. 새 사례를 추가할 때만
+> 에셋이 더 필요합니다.
 
 ### 받은 원본을 손본 내용
 
@@ -35,6 +34,8 @@
   임계값으로는 지워지지 않아, 어두운 배경 대신 03 상담실 배경 레이어에
   얹어 방 배경과 섞이도록 배치했습니다.
 - `avatar/minseo` 는 상반신 원본에서 얼굴 중심 정사각형으로 잘랐습니다.
+- `ui/trophy` · `ui/badge-star` 는 정사각형으로 패딩한 뒤 줄였습니다.
+  그냥 리사이즈하면 가로가 넓은 형태라 원형/사각 틀 안에서 한쪽으로 쏠립니다.
 
 ## scene/ — 배경 (가로형 1536×1024)
 
