@@ -411,7 +411,7 @@
 
 # 5. ui/ — 아이콘형 (투명 배경 PNG, 1024×1024)
 
-## 5-1. `public/assets/ui/trophy.png` — 트로피 【필수】
+## 5-1. `public/assets/ui/trophy.png` — 트로피 ✅ 완료
 
 ```
 황금 트로피 아이콘 1장. 배경은 완전 투명(alpha) PNG. 정사각형(1:1).
@@ -427,7 +427,7 @@
 그림 안에 글자·로고·워터마크·배경을 절대 넣지 말 것.
 ```
 
-## 5-2. `public/assets/ui/badge-star.png` — 별 배지 〈선택〉
+## 5-2. `public/assets/ui/badge-star.png` — 별 배지 ✅ 완료
 
 ```
 별 모양 배지 아이콘 1장. 배경은 완전 투명(alpha) PNG. 정사각형(1:1).

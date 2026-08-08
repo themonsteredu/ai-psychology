@@ -20,14 +20,12 @@
 
 | | |
 | --- | --- |
-| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` · `avatar/seohyun` · `avatar/friend-boy` |
-| ⬜ 필요 | `char/seohyun-full` (CASE 02) · `char/junho-full` (CASE 03) · `ui/trophy` |
+| ✅ 화면에 쓰는 중 | `scene/hallway` · `scene/counseling-room` · `char/minseo-full` · `char/minseo-talk` · `char/minseo-happy` · `char/friends-full` · `avatar/minseo` · `avatar/ai-helper` · `avatar/user` · `career/*` 4종 · `ui/badge-star` · `ui/trophy` · `avatar/seohyun` · `avatar/friend-boy` |
+| ⬜ 필요 | `char/seohyun-full` (CASE 02) · `char/junho-full` (CASE 03) |
 
-> **`char/seohyun-full`·`char/junho-full` 이 급합니다.** CASE 02·03의
-> 단서 탐색 화면에 주인공이 비어 있어서, 지금은 배경 위에 핫스팟만
-> 떠 있는 상태입니다. 프롬프트는 PROMPTS.md 2-5 · 2-6 에 있습니다.
->
-> `ui/trophy` 는 라인 아이콘으로 대체돼 있어 크게 티가 나지 않습니다.
+> **남은 건 이 두 장뿐입니다.** CASE 02·03의 단서 탐색 화면에 주인공이
+> 비어 있어서, 지금은 배경 위에 핫스팟만 떠 있는 상태입니다.
+> 프롬프트는 PROMPTS.md 2-5 · 2-6 에 있습니다.
 
 ### 받은 원본을 손본 내용
 
