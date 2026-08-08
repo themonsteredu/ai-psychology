@@ -31,6 +31,9 @@ export default function CaseScene({ scene, className = "", spotlight = null, tit
           className={`${s.figure} ${spotlight && spotlight !== f.id ? s.dim : ""}`}
           style={f.style}
         >
+          {/* 발밑 그림자 — 없으면 컷아웃이 바닥에서 떠 보인다.
+              앉아 있거나 바닥이 안 보이는 인물에는 붙이지 않는다. */}
+          {f.ground && <span className={s.ground} aria-hidden="true" />}
           <AssetImage src={f.src} alt="" bare className={s.fit} />
         </span>
       ))}

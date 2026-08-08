@@ -26,6 +26,25 @@
   object-position: bottom center;
 }
 
+/* 발이 닿는 자리에 깔리는 타원 그림자. drop-shadow 만으로는 인물이
+   공중에 떠 보여서, 바닥과 만나는 지점을 따로 그려 준다. */
+.ground {
+  position: absolute;
+  left: 50%;
+  bottom: -1.5%;
+  width: 84%;
+  height: 7%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(24, 42, 72, 0.34) 0%,
+    rgba(24, 42, 72, 0.16) 55%,
+    rgba(24, 42, 72, 0) 100%
+  );
+  pointer-events: none;
+}
+
 
 
 .dim {
