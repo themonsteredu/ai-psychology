@@ -12,8 +12,8 @@ AI 시대에 사람의 마음을 이해하는 직업을 체험하는 **중학생
 
 - **Next.js 16 (App Router)** + React 19 — Vercel에 그대로 배포 가능
 - **CSS Modules** + `app/globals.css`의 디자인 토큰 (별도 CSS 프레임워크 없음)
-- 본문 `next/font/google`의 Noto Sans KR, 제목 **에스코어드림(S-Core Dream)** — `@font-face` 로 CDN 로딩,
-  못 받으면 Noto Sans KR 로 자동 대체
+- 본문 `next/font/google`의 Noto Sans KR, 제목 **에스코어드림(S-Core Dream)** —
+  `public/fonts/` 에서 직접 서빙 ([왜 그렇게 했는지](public/fonts/README.md))
 - 빌드 산출물은 정적 프리렌더(`○ Static`)
 
 ```bash
@@ -147,6 +147,7 @@ lib/
   shared.js     모든 사례가 공유하는 셸·활동 규칙·역량·진로 데이터
   korean.js     받침에 따라 조사(이/가, 은/는, 과/와)를 고르는 유틸
 public/assets/  일러스트 에셋 (README.md = 파일명 규약, PROMPTS.md = 생성 프롬프트)
+public/fonts/   제목용 에스코어드림 woff2 (서브셋 + 라이선스 표기)
 design-reference/  최초 시안 이미지 (참조용, 앱에서 사용하지 않음)
 ```
 
